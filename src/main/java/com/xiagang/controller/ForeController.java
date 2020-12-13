@@ -32,4 +32,6 @@ public class ForeController {
         mv.addObject("msg", msg);
         return mv;
     }
+
+
 }
