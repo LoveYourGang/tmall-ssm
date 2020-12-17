@@ -22,7 +22,7 @@ public class ForeController {
         ModelAndView mv = new ModelAndView();
         String msg;
         int res = userService.registerUser(user);
-        if(res == 0) {
+        if (res == 0) {
             msg = "注册信息有误，注册失败请重试。";
             mv.setViewName("register.jsp");
         } else {

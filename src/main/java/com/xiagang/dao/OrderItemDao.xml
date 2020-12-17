@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiagang.dao.OrderItemDao">
+    <sql id="zd">
+        id,pid,oid,uid,number from orderitem
+    </sql>
+
+    <resultMap id="orderItemMap" type="com.xiagang.bean.OrderItem">
+        <id column="id" property="id" />
+        <result column="number" property="number" />
+        <association column="uid" property="user" javaType="com.xiagang.bean.User">
+            <id column="uid" property="id" />
+        </association>
+        <association column="pid" property="product" javaType="com.xiagang.bean.Product">
+            <id column="pid" property="id" />
+        </association>
+        <association column="oid" property="order" javaType="com.xiagang.bean.Order">
+            <id column="oid" property="id" />
+        </association>
+    </resultMap>
+
+    <insert id="insertOrderItem" useGeneratedKeys="true" keyProperty="id" parameterType="com.xiagang.bean.OrderItem">
+        insert into orderitem(pid,oid,uid,number) values (#{pid},#{oid},#{uid},#{number})
+    </insert>
+
+    <select id="selectOrderItemById" resultMap="orderItemMap">
+        select <include refid="zd" /> where id=#{id}
+    </select>
+    <select id="selectOrderItemByUserOrderProduct" resultMap="orderItemMap">
+        select <include refid="zd" /> where uid=#{uid} and oid=#{oid} and pid=#{pid}
+    </select>
+    <select id="selectUserCart" resultMap="orderItemMap">
+        select <include refid="zd" /> where uid=#{id} and oid=-1
+    </select>
+    <select id="selectOrderItemByOrder" resultMap="orderItemMap">
+        select <include refid="zd" /> where oid=#{id}
+    </select>
+
+    <update id="updateOrderItem" parameterType="com.xiagang.bean.OrderItem">
+        update orderitem
+        <trim prefix="set" suffixOverrides=",">
+        <if test="product != null and product.id != 0">
+            pid=#{product.id},
+        </if>
+        <if test="user != null and user.id != 0">
+            uid=#{user.id},
+        </if>
+        <if test="order != null and order.id != 0">
+            oid=#{order.id},
+        </if>
+        <if test="number != 0">
+            number=#{number},
+        </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteOrderItem">
+        delete from orderitem where id=#{id}
+    </delete>
+</mapper>

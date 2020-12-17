@@ -4,6 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
+	public static final String waitPay = "waitPay";
+	public static final String waitDelivery = "waitDelivery";
+	public static final String waitConfirm = "waitConfirm";
+	public static final String waitReview = "waitReview";
+	public static final String finish = "finish";
+	public static final String delete = "delete";
+
 	private String orderCode;
 	private String address;
 	private String post;
@@ -130,31 +137,39 @@ public class Order {
 		return null;
 	}
 
-	/*
+	private String createOrderCode() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(user.getId());
+		sb.append(mobile);
+		sb.append(createDate.getTime());
+		return sb.toString();
+	}
+
+
 	public String getStatusDesc(){
         String desc ="未知";
         switch(status){
-            case OrderDAO.waitPay:
+            case waitPay:
                 desc="待付款";
                 break;
-            case OrderDAO.waitDelivery:
+            case waitDelivery:
                 desc="待发货";
                 break;
-            case OrderDAO.waitConfirm:
+            case waitConfirm:
                 desc="待收货";
                 break;
-            case OrderDAO.waitReview:
-                desc="等评价";
+            case waitReview:
+                desc="待评价";
                 break;
-            case OrderDAO.finish:
+            case finish:
                 desc="完成";
                 break;
-            case OrderDAO.delete:
-                desc="刪除";
+            case delete:
+                desc="已刪除";
                 break;
             default:
                 desc="未知";
         }
         return desc;
-    }*/
+    }
 }
