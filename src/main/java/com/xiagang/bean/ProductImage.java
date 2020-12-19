@@ -1,6 +1,10 @@
 package com.xiagang.bean;
 
 public class ProductImage {
+	public static String ALL = "type_all";
+	public static String DETAIL = "type_detail";
+	public static String SINGLE = "type_single";
+
 	private int id;
 	private Product product;
 	private String type;

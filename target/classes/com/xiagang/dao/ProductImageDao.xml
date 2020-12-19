@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiagang.dao.ProductImageDao">
+    <sql id="zd">
+        id,pid,type from productimage
+    </sql>
+
+    <resultMap id="productImageMap" type="com.xiagang.bean.ProductImage">
+        <id column="id" property="id" />
+        <result column="type" property="type" />
+        <association column="pid" property="product" javaType="com.xiagang.bean.Product">
+            <id column="pid" property="id" />
+        </association>
+    </resultMap>
+
+    <insert id="insertProductImage" useGeneratedKeys="true" keyProperty="id" parameterType="com.xiagang.bean.ProductImage">
+        insert into productimage(pid,type) values (#{product.id},#{type})
+    </insert>
+
+    <select id="selectProductImageById" resultMap="productImageMap">
+        select <include refid="zd" /> where id=#{id}
+    </select>
+    <select id="selectProductImageByProduct" resultMap="productImageMap">
+        select <include refid="zd" /> where pid=#{id}
+    </select>
+
+    <update id="updateProductImage" parameterType="com.xiagang.bean.ProductImage">
+        update productimage
+        <trim prefix="set" suffixOverrides=",">
+            <if test="type != null">
+                type=#{type},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteProductImage">
+        delete from productimage where id=#{id}
+    </delete>
+</mapper>

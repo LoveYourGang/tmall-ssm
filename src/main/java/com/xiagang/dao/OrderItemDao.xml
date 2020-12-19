@@ -42,18 +42,18 @@
     <update id="updateOrderItem" parameterType="com.xiagang.bean.OrderItem">
         update orderitem
         <trim prefix="set" suffixOverrides=",">
-        <if test="product != null and product.id != 0">
-            pid=#{product.id},
-        </if>
-        <if test="user != null and user.id != 0">
-            uid=#{user.id},
-        </if>
-        <if test="order != null and order.id != 0">
-            oid=#{order.id},
-        </if>
-        <if test="number != 0">
-            number=#{number},
-        </if>
+            <if test="product != null and product.id != 0">
+                pid=#{product.id},
+            </if>
+            <if test="user != null and user.id != 0">
+                uid=#{user.id},
+            </if>
+            <if test="order != null and order.id != 0">
+                oid=#{order.id},
+            </if>
+            <if test="number != 0">
+                number=#{number},
+            </if>
         </trim>
         where id=#{id}
     </update>

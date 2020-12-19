@@ -10,7 +10,7 @@ public interface ProductDao {
     int insertProduct(Product product);
 
     Product selectProductById(Integer id);
-    Product selectProductByName(String name);
+    List<Product> selectProductByName(String name);
     List<Product> selectProducts();
     List<Product> selectProductByCategory(Category c);
     List<Product> selectProductByCategoryLimit(@Param("c") Category c, @Param("start") Integer start, @Param("count") Integer count);

@@ -17,7 +17,7 @@ public class Product {
 	private List<ProductImage> productImages;
 	private List<ProductImage> productSingleImages;
 	private List<ProductImage> productDetailImages;
-	private Date createTime;
+	private Date createDate;
 	
 	public int getId() {
 		return id;
@@ -97,16 +97,38 @@ public class Product {
 	public void setProductDetailImages(List<ProductImage> productDetailImages) {
 		this.productDetailImages = productDetailImages;
 	}
-	public Date getCreateTime() {
-		return createTime;
+
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
+
+//	@Override
+////	public String toString() {
+////		return "Product [name=" + name + "]";
+////	}
+
+
 	@Override
 	public String toString() {
-		return "Product [name=" + name + "]";
+		return "Product{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", subTitle='" + subTitle + '\'' +
+				", orignalPrice=" + orignalPrice +
+				", promotePrice=" + promotePrice +
+				", stock=" + stock +
+				", reviewCount=" + reviewCount +
+				", saleCount=" + saleCount +
+				", category=" + category +
+				", firstProductImage=" + firstProductImage +
+				", productImages=" + productImages +
+				", productSingleImages=" + productSingleImages +
+				", productDetailImages=" + productDetailImages +
+				", createDate=" + createDate +
+				'}';
 	}
-	
-	
 }
