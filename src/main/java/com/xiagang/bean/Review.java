@@ -3,11 +3,11 @@ package com.xiagang.bean;
 import java.util.Date;
  
 public class Review {
-    private String content;
-    private Date createDate;
+    private int id;
     private User user;
     private Product product;
-    private int id;
+    private String content;
+    private Date createDate;
  
     public int getId() {
         return id;

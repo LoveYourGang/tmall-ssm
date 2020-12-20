@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiagang.dao.PropertyDao">
+    <sql id="zd">
+        id,pid,ptid,value from propertyvalue
+    </sql>
+
+    <resultMap id="propertyValueMap" type="com.xiagang.bean.PropertyValue">
+        <id column="id" property="id" />
+        <result column="value" property="value" />
+        <association column="pid" property="product" javaType="com.xiagang.bean.Product">
+            <id column="pid" property="id" />
+        </association>
+        <association property="property" javaType="com.xiagang.bean.Property">
+            <id column="ptid" property="id" />
+        </association>
+    </resultMap>
+
+    <select id="selectPropertyValueById" resultMap="propertyValueMap">
+        select <include refid="zd" /> where id=#{id}
+    </select>
+    <select id="selectPropertyValueByProductProperty" resultMap="propertyValueMap">
+        select <include refid="zd" /> where pid=#{p.id} and ptid=#{pt.id}
+    </select>
+    <select id="selectPropertyValueByProduct" resultMap="propertyValueMap">
+        select <include refid="zd" /> where pid=#{id}
+    </select>
+
+    <update id="updatePropertyValue" parameterType="com.xiagang.bean.PropertyValue">
+        update propertyvalue set value=#{value}
+        where id=#{id} or (pid=#{product.id} and ptid=#{property.id})
+    </update>
+
+    <delete id="deletePropertyValue">
+        delete from propertyvalue where id=#{id}
+    </delete>
+
+</mapper>
