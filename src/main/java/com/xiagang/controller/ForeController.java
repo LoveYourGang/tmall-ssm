@@ -18,18 +18,26 @@ public class ForeController {
     }
 
     @RequestMapping("/register.do")
-    public ModelAndView register(User user) {
+    public ModelAndView register(String name, String password) {
         ModelAndView mv = new ModelAndView();
-        String msg;
-        int res = userService.registerUser(user);
-        if (res == 0) {
-            msg = "注册信息有误，注册失败请重试。";
-            mv.setViewName("register.jsp");
-        } else {
-            msg = "恭喜你注册成功！";
-            mv.setViewName("registerSuccess.jsp");
+        String msg, page;
+        if(password == null || password.length() < 6) {
+            msg = "至少输入6位数密码";
+            page = "forward:register.jsp";
+            mv.addObject("msg", msg);
+            mv.setViewName(page);
+            return mv;
         }
-        mv.addObject("msg", msg);
+        if(name != null && userService.isExist(name)) {
+            User user = new User(name, password);
+            int res = userService.register(user);
+            if(res > 0) {
+                page = "redirect:registerSuccess.jsp";
+            } else {
+                page = "redirect:register.jsp";
+            }
+            mv.setViewName(page);
+        }
         return mv;
     }
 

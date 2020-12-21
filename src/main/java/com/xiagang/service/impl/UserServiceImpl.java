@@ -5,21 +5,51 @@ import com.xiagang.dao.UserDao;
 import com.xiagang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserDao userDao;
-    @Override
-    public int registerUser(User user) {
-        String name = user.getName();
-        if(name.length() > 20 || existName(name))
-            return 0;
+import javax.servlet.http.HttpSession;
 
-        return userDao.insertUser(user);
+public class UserServiceImpl implements UserService {
+    private UserDao userDao;
+    @Autowired
+    public UserServiceImpl (UserDao userDao) {
+        this.userDao = userDao;
     }
 
     @Override
-    public boolean existName(String name) {
+    public int register(User user) {
+        return userDao.insertUser(user);
+    }
+
+    public boolean isExist(String name) {
         User user = userDao.selectUserByName(name);
-        return user != null;
+        if(user != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public String registerCheck(String name) {
+        return null;
+    }
+
+    @Override
+    public boolean login(String name, String password) {
+        return false;
+    }
+
+    @Override
+    public boolean loginAjax(String name, String password) {
+        return false;
+    }
+
+    @Override
+    public void logout(HttpSession session) {
+
+    }
+
+    @Override
+    public boolean loginCheck(HttpSession session) {
+        return false;
     }
 }
