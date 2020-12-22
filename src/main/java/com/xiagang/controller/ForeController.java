@@ -5,6 +5,7 @@ import com.xiagang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ public class ForeController {
         this.userService = userService;
     }
 
+    @RequestMapping("/home.do")
     public ModelAndView home() {
         ModelAndView mv = new ModelAndView();
         return mv;
@@ -48,6 +50,21 @@ public class ForeController {
         return mv;
     }
 
+    @RequestMapping("/registerCheck.do")
+    @ResponseBody
+    public String registerCheck(String name) {
+        String msg;
+        int flag = userService.registerCheck(name);
+        if(flag == -1) {
+            msg = "<font color='red'>用户名不合法(不能为空或有空格)</font>";
+        } else if(flag == 1) {
+            msg = "<font color='red'>用户名已存在</font>";
+        } else {
+            msg = "<font color='green'>用户名可以使用</font>";
+        }
+        return msg;
+    }
+
     @RequestMapping("login.do")
     public ModelAndView login(HttpServletRequest request, String name, String password) {
         ModelAndView mv = new ModelAndView();
@@ -56,10 +73,10 @@ public class ForeController {
         if(name != null && password != null) {
             boolean flag = userService.login(session, name, password);
             if(flag) {
-                page = "home.jsp";
+                page = "redirect:home.do";
                 mv.setViewName(page);
             } else {
-                page = "register.jsp";
+                page = "login.jsp";
                 msg = "账号或者密码错误";
                 mv.addObject("msg", msg);
                 mv.setViewName(page);
@@ -68,13 +85,37 @@ public class ForeController {
         return mv;
     }
 
+    @RequestMapping("/ajaxLogin.do")
+    @ResponseBody
+    public String ajaxLogin(HttpServletRequest request, String name, String password) {
+        HttpSession session = request.getSession();
+        String msg;
+        if(userService.loginCheck(session)) {
+            msg = "success";
+        } else {
+            msg = "fail";
+            if(userService.login(session, name, password))
+                msg = "success";
+        }
+        return msg;
+    }
+
+    @RequestMapping("/checkLogin.do")
+    @ResponseBody
+    public String checkLogin(HttpServletRequest request) {
+        if(userService.loginCheck(request.getSession())) {
+            return "success";
+        }
+        return "fail";
+    }
+
     @RequestMapping("logout.do")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if(userService.loginCheck(session)) {
             userService.logout(session);
         }
-        return "index.jsp";
+        return "redirect:home.do";
     }
 
 }
