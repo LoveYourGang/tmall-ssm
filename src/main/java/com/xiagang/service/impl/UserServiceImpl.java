@@ -19,37 +19,43 @@ public class UserServiceImpl implements UserService {
         return userDao.insertUser(user);
     }
 
-    public boolean isExist(String name) {
+    @Override
+    public int registerCheck(String name) {
+        if(name == null || name.length() < 2 || name.contains(" "))
+            return -1;
         User user = userDao.selectUserByName(name);
+        int flag;
         if(user != null) {
-            return true;
+            flag = 1;
         } else {
-            return false;
+            flag = 0;
         }
+        return flag;
     }
 
     @Override
-    public String registerCheck(String name) {
+    public boolean login(HttpSession session, String name, String password) {
+        User user = userDao.selectUserByPassword(name, password);
+        if(user != null) {
+            session.setAttribute("user", user);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String loginAjax(HttpSession session, String name, String password) {
         return null;
     }
 
     @Override
-    public boolean login(String name, String password) {
-        return false;
-    }
-
-    @Override
-    public boolean loginAjax(String name, String password) {
-        return false;
-    }
-
-    @Override
     public void logout(HttpSession session) {
-
+        session.removeAttribute("user");
     }
 
     @Override
     public boolean loginCheck(HttpSession session) {
-        return false;
+        User user = (User) session.getAttribute("user");
+        return user != null;
     }
 }
