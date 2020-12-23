@@ -10,9 +10,7 @@
     <resultMap id="propertyMap" type="com.xiagang.bean.Property">
         <id column="id" property="id" />
         <result column="name" property="name" />
-        <association column="cid" property="category" javaType="com.xiagang.bean.Category">
-            <id column="cid" property="id" />
-        </association>
+        <association column="cid" property="category" javaType="com.xiagang.bean.Category" select="com.xiagang.dao.CategoryDao.selectCategoryById" fetchType="lazy" />
     </resultMap>
 
     <insert id="insertProperty" useGeneratedKeys="true" keyProperty="id" parameterType="com.xiagang.bean.Property">

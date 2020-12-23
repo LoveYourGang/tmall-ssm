@@ -11,7 +11,6 @@
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src/main/java" />
-          <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -19,9 +18,6 @@
       <configuration>
         <fileset id="fileset" name="ApplicationContext" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/applicationContext.xml</file>
-        </fileset>
-        <fileset id="fileset2" name="Springmvc" removed="false">
-          <file>file://$MODULE_DIR$/src/main/resources/springmvc.xml</file>
         </fileset>
       </configuration>
     </facet>
@@ -35,7 +31,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />

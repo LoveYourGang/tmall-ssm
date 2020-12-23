@@ -11,12 +11,8 @@
     <resultMap id="propertyValueMap" type="com.xiagang.bean.PropertyValue">
         <id column="id" property="id" />
         <result column="value" property="value" />
-        <association column="pid" property="product" javaType="com.xiagang.bean.Product">
-            <id column="pid" property="id" />
-        </association>
-        <association property="property" javaType="com.xiagang.bean.Property">
-            <id column="ptid" property="id" />
-        </association>
+        <association column="pid" property="product" javaType="com.xiagang.bean.Product" select="com.xiagang.dao.ProductDao.selectProductById" fetchType="lazy" />
+        <association column="ptid" property="property" javaType="com.xiagang.bean.Property" select="com.xiagang.dao.PropertyDao.selectPropertyById" fetchType="lazy" />
     </resultMap>
 
     <select id="selectPropertyValueById" resultMap="propertyValueMap">

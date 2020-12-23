@@ -5,7 +5,7 @@
 
 <mapper namespace="com.xiagang.dao.OrderDao">
     <sql id="zd">
-        order_.id as id,orderCode,address,post,receiver,mobile,userMessage,createDate,payDate,deliveryDate,confirmDate,uid,status,user.name as name from order_,user
+        order_.id as id,orderCode,address,post,receiver,mobile,userMessage,createDate,payDate,deliveryDate,confirmDate,uid,status from order_
     </sql>
 
     <resultMap id="orderMap" type="com.xiagang.bean.Order">
@@ -21,10 +21,7 @@
         <result column="deliveryDate" property="deliveryDate" />
         <result column="confirmDate" property="confirmDate" />
         <result column="status" property="status" />
-        <association column="uid" property="user" javaType="com.xiagang.bean.User">
-            <id column="uid" property="id" />
-            <result column="name" property="name" />
-        </association>
+        <association column="uid" property="user" javaType="com.xiagang.bean.User" fetchType="lazy" select="com.xiagang.dao.UserDao.selectUserById" />
     </resultMap>
 
     <insert id="insertOrder" useGeneratedKeys="true" keyProperty="id">
@@ -34,25 +31,25 @@
 
     <select id="selectOrderById" resultMap="orderMap">
         select <include refid="zd" />
-        where order_.id=#{id} and user.id=uid
+        where id=#{id}
     </select>
     <select id="selectOrderByOrderCode" resultMap="orderMap">
         select <include refid="zd" />
-        where orderCode=#{orderCode} and user.id=uid
+        where orderCode=#{orderCode}
     </select>
     <select id="selectOrderByUser" resultMap="orderMap">
         select <include refid="zd" />
-        where uid=#{id} and user.id=uid
+        where uid=#{id}
     </select>
     <select id="selectOrderByUserAndStatus" resultMap="orderMap">
         select <include refid="zd" />
-        where uid=#{user.id} and status=#{status} and user.id=uid
+        where uid=#{user.id} and status=#{status}
     </select>
     <select id="selectAllOrders" resultMap="orderMap">
-        select <include refid="zd" /> where user.id=uid
+        select <include refid="zd" />
     </select>
     <select id="selectOrderLimit" resultMap="orderMap">
-        select <include refid="zd" /> where user.id=uid
+        select <include refid="zd" />
         order by id asc limit #{start},#{count}
     </select>
 

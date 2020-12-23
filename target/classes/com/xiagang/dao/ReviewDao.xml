@@ -11,12 +11,8 @@
         <id column="id" property="id" />
         <result column="content" property="content" />
         <result column="createDate" property="createDate" />
-        <association column="uid" property="user" javaType="com.xiagang.bean.User">
-            <id column="uid" property="id" />
-        </association>
-        <association property="product" javaType="com.xiagang.bean.Product">
-            <id column="pid" property="id" />
-        </association>
+        <association column="uid" property="user" javaType="com.xiagang.bean.User" select="com.xiagang.dao.UserDao.selectUserById" fetchType="lazy" />
+        <association column="pid" property="product" javaType="com.xiagang.bean.Product" select="com.xiagang.dao.ProductDao.selectProductById" fetchType="lazy" />
     </resultMap>
 
     <insert id="insertReview" useGeneratedKeys="true" keyProperty="id">

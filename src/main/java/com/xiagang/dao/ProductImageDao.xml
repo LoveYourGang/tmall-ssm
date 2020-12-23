@@ -11,9 +11,7 @@
     <resultMap id="productImageMap" type="com.xiagang.bean.ProductImage">
         <id column="id" property="id" />
         <result column="type" property="type" />
-        <association column="pid" property="product" javaType="com.xiagang.bean.Product">
-            <id column="pid" property="id" />
-        </association>
+        <association column="pid" property="product" javaType="com.xiagang.bean.Product" select="com.xiagang.dao.ProductDao.selectProductById" fetchType="lazy" />
     </resultMap>
 
     <insert id="insertProductImage" useGeneratedKeys="true" keyProperty="id" parameterType="com.xiagang.bean.ProductImage">
@@ -25,6 +23,9 @@
     </select>
     <select id="selectProductImageByProduct" resultMap="productImageMap">
         select <include refid="zd" /> where pid=#{id}
+    </select>
+    <select id="selectProductImageByProductType" resultMap="productImageMap">
+        select <include refid="zd" /> where pid=#{p.id} and type=#{type}
     </select>
 
     <update id="updateProductImage" parameterType="com.xiagang.bean.ProductImage">

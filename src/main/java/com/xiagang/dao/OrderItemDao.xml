@@ -11,15 +11,9 @@
     <resultMap id="orderItemMap" type="com.xiagang.bean.OrderItem">
         <id column="id" property="id" />
         <result column="number" property="number" />
-        <association column="uid" property="user" javaType="com.xiagang.bean.User">
-            <id column="uid" property="id" />
-        </association>
-        <association column="pid" property="product" javaType="com.xiagang.bean.Product">
-            <id column="pid" property="id" />
-        </association>
-        <association column="oid" property="order" javaType="com.xiagang.bean.Order">
-            <id column="oid" property="id" />
-        </association>
+        <association column="uid" property="user" javaType="com.xiagang.bean.User" select="com.xiagang.dao.UserDao.selectUserById" fetchType="lazy" />
+        <association column="pid" property="product" javaType="com.xiagang.bean.Product" select="com.xiagang.dao.ProductDao.selectProductById" fetchType="lazy" />
+        <association column="oid" property="order" javaType="com.xiagang.bean.Order" select="com.xiagang.dao.OrderDao.selectOrderById" fetchType="lazy" />
     </resultMap>
 
     <insert id="insertOrderItem" useGeneratedKeys="true" keyProperty="id" parameterType="com.xiagang.bean.OrderItem">

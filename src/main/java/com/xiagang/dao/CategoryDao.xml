@@ -9,7 +9,7 @@
     </insert>
     
     <select id="selectCategoryById" resultType="Category">
-        select id,name from catogery where id=#{id}
+        select id,name from category where id=#{id}
     </select>
     <select id="selectCategoryByName" resultType="Category">
         select id,name from category where name=#{name}

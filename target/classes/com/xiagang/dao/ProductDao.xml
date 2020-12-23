@@ -16,9 +16,7 @@
         <result column="promotePrice" property="promotePrice" />
         <result column="stock" property="stock" />
         <result column="createDate" property="createDate" />
-        <association column="cid" property="category" javaType="com.xiagang.bean.Category">
-            <id column="cid" property="id" />
-        </association>
+        <association column="cid" property="category" javaType="com.xiagang.bean.Category" select="com.xiagang.dao.CategoryDao.selectCategoryById" fetchType="lazy" />
     </resultMap>
 
     <insert id="insertProduct" parameterType="com.xiagang.bean.Product" useGeneratedKeys="true" keyProperty="id">

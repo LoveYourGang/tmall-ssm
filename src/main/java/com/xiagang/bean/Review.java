@@ -12,7 +12,6 @@ public class Review {
     public int getId() {
         return id;
     }
- 
     public void setId(int id) {
         this.id = id;
     }
@@ -28,7 +27,6 @@ public class Review {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
-     
     public User getUser() {
         return user;
     }
