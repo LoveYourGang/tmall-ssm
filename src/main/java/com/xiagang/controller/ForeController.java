@@ -65,7 +65,11 @@ public class ForeController {
         return msg;
     }
 
+<<<<<<< HEAD
     @RequestMapping("/login.do")
+=======
+    @RequestMapping("login.do")
+>>>>>>> 9f373a11234ebb9d0f8c25f5834b1589eeeccb91
     public ModelAndView login(HttpServletRequest request, String name, String password) {
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
@@ -109,7 +113,11 @@ public class ForeController {
         return "fail";
     }
 
+<<<<<<< HEAD
     @RequestMapping("/logout.do")
+=======
+    @RequestMapping("logout.do")
+>>>>>>> 9f373a11234ebb9d0f8c25f5834b1589eeeccb91
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if(userService.loginCheck(session)) {
