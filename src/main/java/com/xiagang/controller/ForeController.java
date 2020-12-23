@@ -1,7 +1,7 @@
 package com.xiagang.controller;
 
-import com.xiagang.bean.User;
-import com.xiagang.service.UserService;
+import com.xiagang.bean.*;
+import com.xiagang.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,19 +10,38 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller("/fore")
 public class ForeController {
     private UserService userService;
+    private CategoryService categoryService;
+    private ProductService productService;
+    private PropertyValueService propertyValueService;
+    private ReviewService reviewService;
+    private OrderItemService orderItemService;
 
     @Autowired
-    public ForeController(UserService userService) {
+    public ForeController(UserService userService,
+                          CategoryService categoryService,
+                          ProductService productService,
+                          PropertyValueService propertyValueService,
+                          ReviewService reviewService,
+                          OrderItemService orderItemService) {
         this.userService = userService;
+        this.categoryService = categoryService;
+        this.productService = productService;
+        this.propertyValueService = propertyValueService;
+        this.reviewService = reviewService;
+        this.orderItemService = orderItemService;
     }
 
     @RequestMapping("/home.do")
     public ModelAndView home() {
         ModelAndView mv = new ModelAndView();
+        List<Category> cs = categoryService.getCategories();
+        mv.addObject("cs", cs);
+        mv.setViewName("home.jsp");
         return mv;
     }
 
@@ -116,6 +135,20 @@ public class ForeController {
             userService.logout(session);
         }
         return "redirect:home.do";
+    }
+
+    @RequestMapping("/product.do")
+    public ModelAndView product(Integer pid) {
+        ModelAndView mv = new ModelAndView();
+        Product p = productService.getProduct(pid);
+        List<PropertyValue> pvs = propertyValueService.getPropertyValue(p);
+        List<Review> reviews = reviewService.getReviews(p);
+        mv.addObject("p", p);
+        mv.addObject("pvs", pvs);
+        mv.addObject("reviews", reviews);
+        mv.setViewName("product.jsp");
+
+        return mv;
     }
 
 }

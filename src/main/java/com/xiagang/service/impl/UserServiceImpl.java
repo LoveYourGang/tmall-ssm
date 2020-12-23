@@ -4,9 +4,11 @@ import com.xiagang.bean.User;
 import com.xiagang.dao.UserDao;
 import com.xiagang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 
+@Service("userService")
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
     @Autowired

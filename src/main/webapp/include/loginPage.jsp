@@ -46,7 +46,7 @@ $(function(){
 	
 	<img id="loginBackgroundImg" class="loginBackgroundImg" src="img/site/loginBackground.png">
 	
-	<form class="loginForm" action="forelogin" method="post">
+	<form class="loginForm" action="fore/login.do" method="post">
 		<div id="loginSmallDiv" class="loginSmallDiv">
 			<div class="loginErrorMessageDiv">
 				<div class="alert alert-danger" >

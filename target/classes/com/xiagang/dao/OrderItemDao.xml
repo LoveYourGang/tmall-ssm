@@ -32,6 +32,9 @@
     <select id="selectOrderItemByOrder" resultMap="orderItemMap">
         select <include refid="zd" /> where oid=#{id}
     </select>
+    <select id="selectSaleCount" resultType="int">
+        select COALESCE (sum(number),0) from orderitem where pid=#{id} and oid != -1
+    </select>
 
     <update id="updateOrderItem" parameterType="com.xiagang.bean.OrderItem">
         update orderitem

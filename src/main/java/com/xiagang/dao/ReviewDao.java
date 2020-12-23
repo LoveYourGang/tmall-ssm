@@ -14,6 +14,7 @@ public interface ReviewDao {
     Review selectReviewByUserProduct(@Param("user") User user, @Param("p") Product p);
     List<Review> selectReviewByUser(User user);
     List<Review> selectReviewByProduct(Product p);
+    int selectReviewCount(Product p);
 
     int updateReview(Review r);
 

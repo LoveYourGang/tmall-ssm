@@ -106,12 +106,6 @@ public class Product {
 		this.createDate = createDate;
 	}
 
-//	@Override
-////	public String toString() {
-////		return "Product [name=" + name + "]";
-////	}
-
-
 	@Override
 	public String toString() {
 		return "Product{" +

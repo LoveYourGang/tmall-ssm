@@ -24,8 +24,10 @@ public class DaoTest {
     @Test
     public void testOrderItemDao() {
         OrderItemDao dao = (OrderItemDao) ctx.getBean("orderItemDao");
-        OrderItem oi = dao.selectOrderItemById(3);
-        System.out.println(oi.getUser().getName());
+        Product p = new Product();
+        p.setId(966);
+        int s = dao.selectSaleCount(p);
+        System.out.println("销量"+s);
     }
 
     @Test
@@ -59,7 +61,9 @@ public class DaoTest {
     @Test
     public void testReviewDao() {
         ReviewDao dao = (ReviewDao) ctx.getBean("reviewDao");
-        Review r = dao.selectReviewById(11);
-        System.out.println(r.getUser().getName() + "," + r.getProduct().getName());
+        Product p = new Product();
+        p.setId(965);
+        int r = dao.selectReviewCount(p);
+        System.out.println("评论" + r);
     }
 }

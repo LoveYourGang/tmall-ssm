@@ -31,6 +31,9 @@
     <select id="selectReviewByProduct" resultMap="reviewMap">
         select <include refid="zd" /> where pid=#{id}
     </select>
+    <select id="selectReviewCount" resultType="int">
+        select COALESCE (count(id),0) from review where pid=#{id}
+    </select>
 
     <update id="updateReview" parameterType="com.xiagang.bean.Review">
         update review set content=#{content} where id=#{id}

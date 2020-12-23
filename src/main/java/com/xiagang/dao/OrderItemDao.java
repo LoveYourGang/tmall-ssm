@@ -2,6 +2,7 @@ package com.xiagang.dao;
 
 import com.xiagang.bean.Order;
 import com.xiagang.bean.OrderItem;
+import com.xiagang.bean.Product;
 import com.xiagang.bean.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,6 +15,7 @@ public interface OrderItemDao {
     OrderItem selectOrderItemByUserOrderProduct(@Param("uid") Integer uid, @Param("oid") Integer oid, @Param("pid") Integer pid);
     List<OrderItem> selectUserCart(User user);
     List<OrderItem> selectOrderItemByOrder(Order order);
+    int selectSaleCount(Product p);
 
     int updateOrderItem(OrderItem oi);
 

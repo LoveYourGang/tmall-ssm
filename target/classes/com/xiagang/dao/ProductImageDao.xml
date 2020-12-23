@@ -24,6 +24,9 @@
     <select id="selectProductImageByProduct" resultMap="productImageMap">
         select <include refid="zd" /> where pid=#{id}
     </select>
+    <select id="selectProductImageByProductType" resultMap="productImageMap">
+        select <include refid="zd" /> where pid=#{p.id} and type=#{type}
+    </select>
 
     <update id="updateProductImage" parameterType="com.xiagang.bean.ProductImage">
         update productimage
