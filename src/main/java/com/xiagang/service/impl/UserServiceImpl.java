@@ -21,11 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int registerCheck(String name) {
-<<<<<<< HEAD
         if(name == null || name.isEmpty() || name.contains(" "))
-=======
-        if(name == null || name.length() < 2 || name.contains(" "))
->>>>>>> 9f373a11234ebb9d0f8c25f5834b1589eeeccb91
             return -1;
         User user = userDao.selectUserByName(name);
         int flag;
@@ -45,14 +41,6 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         return false;
-<<<<<<< HEAD
-=======
-    }
-
-    @Override
-    public String loginAjax(HttpSession session, String name, String password) {
-        return null;
->>>>>>> 9f373a11234ebb9d0f8c25f5834b1589eeeccb91
     }
 
     @Override
