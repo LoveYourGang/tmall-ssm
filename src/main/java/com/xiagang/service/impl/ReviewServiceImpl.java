@@ -7,6 +7,7 @@ import com.xiagang.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service("reviewService")
@@ -16,6 +17,12 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     public ReviewServiceImpl(ReviewDao reviewDao) {
         this.reviewDao = reviewDao;
+    }
+
+    @Override
+    public int addReview(Review r) {
+        r.setCreateDate(new Date());
+        return reviewDao.insertReview(r);
     }
 
     @Override

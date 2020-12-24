@@ -132,19 +132,6 @@ public class Order {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	public String getStatusDesc(String status) {
-		return null;
-	}
-
-	private String createOrderCode() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(user.getId());
-		sb.append(mobile);
-		sb.append(createDate.getTime());
-		return sb.toString();
-	}
-
 
 	public String getStatusDesc(){
         String desc ="未知";

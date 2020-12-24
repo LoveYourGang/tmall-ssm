@@ -51,4 +51,9 @@ public class OrderItemServiceImpl implements OrderItemService {
         return orderItemDao.updateOrderItem(oi);
     }
 
+    @Override
+    public int deleteOrderItem(Integer id) {
+        return orderItemDao.deleteOrderItem(id);
+    }
+
 }

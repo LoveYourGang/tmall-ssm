@@ -29,11 +29,14 @@
     <select id="selectUserCart" resultMap="orderItemMap">
         select <include refid="zd" /> where uid=#{id} and oid=-1
     </select>
+    <select id="selectUserCartCount" resultType="int">
+        select coalesce (count(id),0) from orderitem where uid=#{id} and oid=-1
+    </select>
     <select id="selectOrderItemByOrder" resultMap="orderItemMap">
         select <include refid="zd" /> where oid=#{id}
     </select>
     <select id="selectSaleCount" resultType="int">
-        select COALESCE (sum(number),0) from orderitem where pid=#{id} and oid != -1
+        select coalesce (sum(number),0) from orderitem where pid=#{id} and oid != -1
     </select>
 
     <update id="updateOrderItem" parameterType="com.xiagang.bean.OrderItem">

@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@Controller("/fore")
+@Controller
+@RequestMapping("/fore")
 public class ForeController {
     private UserService userService;
     private CategoryService categoryService;
@@ -24,6 +25,7 @@ public class ForeController {
     private PropertyValueService propertyValueService;
     private ReviewService reviewService;
     private OrderItemService orderItemService;
+    private OrderService orderService;
 
     @Autowired
     public ForeController(UserService userService,
@@ -31,13 +33,15 @@ public class ForeController {
                           ProductService productService,
                           PropertyValueService propertyValueService,
                           ReviewService reviewService,
-                          OrderItemService orderItemService) {
+                          OrderItemService orderItemService,
+                          OrderService orderService) {
         this.userService = userService;
         this.categoryService = categoryService;
         this.productService = productService;
         this.propertyValueService = propertyValueService;
         this.reviewService = reviewService;
         this.orderItemService = orderItemService;
+        this.orderService = orderService;
     }
 
     @RequestMapping("/home.do")
@@ -89,9 +93,8 @@ public class ForeController {
     }
 
     @RequestMapping("/login.do")
-    public ModelAndView login(HttpServletRequest request, String name, String password) {
+    public ModelAndView login(HttpSession session, String name, String password) {
         ModelAndView mv = new ModelAndView();
-        HttpSession session = request.getSession();
         String msg, page;
         if(name != null && password != null) {
             boolean flag = userService.login(session, name, password);
@@ -110,8 +113,7 @@ public class ForeController {
 
     @RequestMapping("/ajaxLogin.do")
     @ResponseBody
-    public String ajaxLogin(HttpServletRequest request, String name, String password) {
-        HttpSession session = request.getSession();
+    public String ajaxLogin(HttpSession session, String name, String password) {
         String msg;
         if(userService.loginCheck(session)) {
             msg = "success";
@@ -125,16 +127,15 @@ public class ForeController {
 
     @RequestMapping("/checkLogin.do")
     @ResponseBody
-    public String checkLogin(HttpServletRequest request) {
-        if(userService.loginCheck(request.getSession())) {
+    public String checkLogin(HttpSession session) {
+        if(userService.loginCheck(session)) {
             return "success";
         }
         return "fail";
     }
 
     @RequestMapping("/logout.do")
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession();
+    public String logout(HttpSession session) {
         if(userService.loginCheck(session)) {
             userService.logout(session);
         }
@@ -261,6 +262,7 @@ public class ForeController {
         return "fail";
     }
 
+    @RequestMapping("/cart.do")
     public ModelAndView cart(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         User user = (User) session.getAttribute("user");
@@ -272,5 +274,143 @@ public class ForeController {
             mv.setViewName("redirect:login.jsp");
         }
         return mv;
+    }
+
+    @RequestMapping("/changeOrderItem.do")
+    @ResponseBody
+    public String changeOrderItem(HttpSession session, Integer pid, Integer num) {
+        User user = (User) session.getAttribute("user");
+        if(user != null) {
+            OrderItem oi = orderItemService.getOrderItem(user.getId(), -1, pid);
+            oi.setNumber(num);
+            if(orderItemService.modifyOrderItem(oi) > 0)
+                return "success";
+        }
+        return "fail";
+    }
+
+    @RequestMapping("/deleteOrderItem.do")
+    @ResponseBody
+    public String deleteOrderItem(HttpSession session, Integer oiid) {
+        User user = (User) session.getAttribute("user");
+        if(user != null && orderItemService.deleteOrderItem(oiid) > 0) {
+            int cartTotalItemNumber = (int) session.getAttribute("cartTotalItemNumber");
+            session.setAttribute("cartTotalItemNumber", --cartTotalItemNumber);
+            return "success";
+        }
+        return "fail";
+    }
+
+    @RequestMapping("/createOrder.do")
+    public String createOrder(HttpSession session, Order order) {
+        List<OrderItem> ois = (List<OrderItem>) session.getAttribute("ois");
+        User user = (User) session.getAttribute("user");
+        int cartTotalItemNumber = (int) session.getAttribute("cartTotalItemNumber");
+        if(ois != null && user != null) {
+            order.setUser(user);
+            order.setOrderItems(ois);
+            if(orderService.addOrder(order) > 0) {
+                for(OrderItem oi: ois) {
+                    oi.setOrder(order);
+                    if(orderItemService.modifyOrderItem(oi) > 0)
+                        cartTotalItemNumber--;
+                }
+            }
+        }
+        session.setAttribute("cartTotalItemNumber", cartTotalItemNumber);
+        return "redirect:fore/alipay.do?oid=" + order.getId() + "&total=" + order.getTotal();
+    }
+
+    @RequestMapping("/alipay.do")
+    public String alipay() {
+        return "alipay.jsp";
+    }
+
+    @RequestMapping("/payed.do")
+    public ModelAndView payed(Integer oid) {
+        ModelAndView mv = new ModelAndView();
+        Order order = orderService.getOrder(oid);
+        mv.setViewName("redirect:fore/alipay.do?oid=" + order.getId() + "&total=" + order.getTotal());
+        if(orderService.payOrder(order) > 0) {
+            mv.addObject("o", order);
+            mv.setViewName("payed.jsp");
+        }
+        return mv;
+    }
+
+    @RequestMapping("/bought.do")
+    public ModelAndView bought(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        User user = (User) session.getAttribute("user");
+        List<Order> os = orderService.getOrder(user);
+        Collections.sort(os, new OrderDateComparator());
+        mv.addObject("os", os);
+        mv.setViewName("bought.jsp");
+        return mv;
+    }
+
+    @RequestMapping("/deleteOrder.do")
+    @ResponseBody
+    public String deleteOrder(Integer oid) {
+        if(orderService.deleteOrder(oid) > 0)
+            return "success";
+        return "fail";
+    }
+
+    @RequestMapping("/confirmPay.do")
+    public ModelAndView confirmPay(Integer oid) {
+        ModelAndView mv = new ModelAndView();
+        Order order = orderService.getOrder(oid);
+        mv.addObject("o", order);
+        mv.setViewName("confirmPay.jsp");
+        return mv;
+    }
+
+    @RequestMapping("orderConfirmed.do")
+    @ResponseBody
+    public String orderConfirmed(Integer oid) {
+        Order order = orderService.getOrder(oid);
+        if(orderService.confirmOrder(order) > 0) {
+            return "orderConfirmed.jsp";
+        }
+        return "redirect:fore/confirmPay.do?oid=" + oid;
+    }
+
+    @RequestMapping("/review.do")
+    public ModelAndView review(Integer oid) {
+        ModelAndView mv = new ModelAndView();
+        Order order = orderService.getOrder(oid);
+        List<OrderItem> ois = order.getOrderItems();
+        List<List<Review>> reviews = new ArrayList<>(ois.size());
+        for(OrderItem oi: ois) {
+            Product p = oi.getProduct();
+            List<Review> rs = reviewService.getReviews(p);
+            reviews.add(rs);
+        }
+        mv.addObject("o", order);
+        mv.addObject("ois", ois);
+        mv.addObject("reviews", reviews);
+        mv.setViewName("review.jsp");
+        return mv;
+    }
+
+    @RequestMapping("/doReview.do")
+    public String doReview(HttpSession session, Integer oid, Integer[] pid, String[] content) {
+        User user = (User) session.getAttribute("user");
+        Order order = orderService.getOrder(oid);
+        boolean flag = true;
+        for(int i=0; i < pid.length; i++) {
+            Review r = new Review();
+            Product product = productService.getProduct(pid[i]);
+            String text = content[i];
+            r.setUser(user);
+            r.setProduct(product);
+            r.setContent(text);
+            flag = flag && (reviewService.addReview(r) > 0);
+        }
+        if(flag) {
+            orderService.finishOrder(order);
+        }
+        return "redirect:fore/review.do?showonly=true&oid=" + oid;
     }
 }

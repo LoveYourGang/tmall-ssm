@@ -13,5 +13,8 @@ public interface OrderItemService {
     OrderItem getOrderItem(Integer id);
     OrderItem getOrderItem(Integer uid, Integer oid, Integer pid);
     List<OrderItem> getCart(User user);
+
     int modifyOrderItem(OrderItem oi);
+
+    int deleteOrderItem(Integer id);
 }

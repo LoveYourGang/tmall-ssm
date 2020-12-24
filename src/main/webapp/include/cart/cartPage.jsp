@@ -26,13 +26,14 @@ $(function(){
 	
 	$('#deleteConfirmModal').on('hidden.bs.modal', function (e) {
 		if(deleteOrderItem){
-			var page="foredeleteOrderItem";
+			var page="fore/deleteOrderItem.do";
 			$.post(
 				    page,
 				    {"oiid":deleteOrderItemid},
 				    function(result){
 						if("success"==result){
 							//$("tr.cartProductItemTR[oiid="+deleteOrderItemid+"]").hide();
+							//alert(result);
 							location.reload();
 						}
 						else{
@@ -202,7 +203,7 @@ function syncPrice(pid,num,price){
 	$(".cartProductItemSmallSumPrice[pid="+pid+"]").html("￥"+cartProductItemSmallSumPrice);
 	calcCartSumPriceAndNumber();
 	
-	var page = "forechangeOrderItem";
+	var page = "fore/changeOrderItem.do";
 	$.post(
 		    page,
 		    {"pid":pid,"num":num},

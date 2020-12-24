@@ -9,7 +9,7 @@
 		<c:forEach items="${cs}" var="c">
 			<div cid="${c.id}" class="eachCategory">
 				<span class="glyphicon glyphicon-link"></span>
-				<a href="forecategory?cid=${c.id}">
+				<a href="/fore/category.do?cid=${c.id}">
 					${c.name}
 				</a>
 			</div>

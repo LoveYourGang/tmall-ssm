@@ -1,6 +1,7 @@
 package com.xiagang.service.impl;
 
 import com.xiagang.bean.User;
+import com.xiagang.dao.OrderItemDao;
 import com.xiagang.dao.UserDao;
 import com.xiagang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,11 @@ import javax.servlet.http.HttpSession;
 @Service("userService")
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
+    private OrderItemDao orderItemDao;
     @Autowired
-    public UserServiceImpl (UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, OrderItemDao orderItemDao) {
         this.userDao = userDao;
+        this.orderItemDao = orderItemDao;
     }
 
     @Override
@@ -40,6 +43,8 @@ public class UserServiceImpl implements UserService {
         User user = userDao.selectUserByPassword(name, password);
         if(user != null) {
             session.setAttribute("user", user);
+            int cartTotalItemNumber = orderItemDao.selectUserCartCount(user);
+            session.setAttribute("cartTotalItemNumber", cartTotalItemNumber);
             return true;
         }
         return false;

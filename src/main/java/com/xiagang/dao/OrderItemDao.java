@@ -14,6 +14,7 @@ public interface OrderItemDao {
     OrderItem selectOrderItemById(Integer id);
     OrderItem selectOrderItemByUserOrderProduct(@Param("uid") Integer uid, @Param("oid") Integer oid, @Param("pid") Integer pid);
     List<OrderItem> selectUserCart(User user);
+    int selectUserCartCount(User user);
     List<OrderItem> selectOrderItemByOrder(Order order);
     int selectSaleCount(Product p);
 

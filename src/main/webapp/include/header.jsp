@@ -12,8 +12,13 @@
 
 
 <html>
-
+	<%
+	String basePath = request.getScheme() + "://"
+	+ request.getServerName() + ":" +
+	request.getServerPort() + request.getContextPath() + "/";
+    %>
 <head>
+	<base href="<%=basePath%>">
 	<title>夏小港的天猫商城</title>
 	<script src="js/jquery/2.0.0/jquery.min.js"></script>
 	<link href="css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">

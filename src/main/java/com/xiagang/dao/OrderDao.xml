@@ -26,7 +26,7 @@
 
     <insert id="insertOrder" useGeneratedKeys="true" keyProperty="id">
         insert into order_(orderCode,address,post,receiver,mobile,userMessage,createDate,payDate,deliveryDate,confirmDate,uid,status)
-        values(#{orderCode},#{address},#{post},#{receiver},#{mobile},#{userMessage},#{createDate},#{payDate},#{deliveryDate},#{confirmDate},#{uid},#{status})
+        values(#{orderCode},#{address},#{post},#{receiver},#{mobile},#{userMessage},#{createDate},#{payDate},#{deliveryDate},#{confirmDate},#{user.id},#{status})
     </insert>
 
     <select id="selectOrderById" resultMap="orderMap">

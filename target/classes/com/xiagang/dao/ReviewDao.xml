@@ -16,7 +16,7 @@
     </resultMap>
 
     <insert id="insertReview" useGeneratedKeys="true" keyProperty="id">
-        insert into review(content,uid,pid,createDate) values (#{id},#{content},#{user.id},#{product.id},#{createDate})
+        insert into review(content,uid,pid,createDate) values (#{content},#{user.id},#{product.id},#{createDate})
     </insert>
 
     <select id="selectReviewById" resultMap="reviewMap">
