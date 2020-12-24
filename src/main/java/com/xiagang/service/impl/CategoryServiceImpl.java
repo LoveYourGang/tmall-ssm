@@ -32,6 +32,13 @@ public class CategoryServiceImpl implements CategoryService {
         return cs;
     }
 
+    @Override
+    public Category getCategory(Integer id) {
+        Category c = categoryDao.selectCategoryById(id);
+        fillCategory(c);
+        return c;
+    }
+
     private void fillCategory(Category c) {
         List<Product> products = productService.getProducts(c);
         c.setProducts(products);

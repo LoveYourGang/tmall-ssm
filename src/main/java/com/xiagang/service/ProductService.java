@@ -9,4 +9,5 @@ public interface ProductService {
     List<Product> getProducts();
     List<Product> getProducts(Category c);
     Product getProduct(Integer id);
+    List<Product> searchProducts(String keyword);
 }

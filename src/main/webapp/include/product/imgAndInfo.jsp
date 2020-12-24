@@ -48,7 +48,7 @@ $(function(){
                     if("success"==result){
                         var pid = ${p.id};
                         var num= $(".productNumberSetting").val();
-                        var addCartpage = "foreaddCart";
+                        var addCartpage = "fore/addCart";
                         $.get(
                                 addCartpage,
                                 {"pid":pid,"num":num},
@@ -75,7 +75,7 @@ $(function(){
         return false;
     });
     $(".buyLink").click(function(){
-        var page = "forecheckLogin";
+        var page = "fore/checkLogin";
         $.get(
                 page,
                 function(result){
@@ -229,7 +229,7 @@ $(function(){
         </div>    
          
         <div class="buyDiv">
-            <a class="buyLink" href="forebuyone?pid=${p.id}"><button class="buyButton">立即购买</button></a>
+            <a class="buyLink" href="fore/buyone?pid=${p.id}"><button class="buyButton">立即购买</button></a>
             <a href="#nowhere" class="addCartLink"><button class="addCartButton"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button></a>
         </div>
     </div>

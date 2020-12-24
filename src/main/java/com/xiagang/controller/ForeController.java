@@ -1,7 +1,9 @@
 package com.xiagang.controller;
 
 import com.xiagang.bean.*;
+import com.xiagang.comparator.*;
 import com.xiagang.service.*;
+import com.xiagang.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller("/fore")
@@ -151,4 +155,122 @@ public class ForeController {
         return mv;
     }
 
+    @RequestMapping("/category.do")
+    public ModelAndView category(Integer cid, String sort) {
+        ModelAndView mv = new ModelAndView();
+        Category c = categoryService.getCategory(cid);
+        if(sort != null) {
+            switch(sort) {
+                case "all":
+                    Collections.sort(c.getProducts(), new ProductAllComparator());
+                    break;
+                case "review":
+                    Collections.sort(c.getProducts(), new ProductReviewComparator());
+                    break;
+                case "date":
+                    Collections.sort(c.getProducts(), new ProductDateComparator());
+                    break;
+                case "saleCount":
+                    Collections.sort(c.getProducts(), new ProductSaleComparator());
+                    break;
+                case "price":
+                    Collections.sort(c.getProducts(), new ProductPriceComparator());
+                    break;
+            }
+        }
+        mv.addObject("c", c);
+        Page page = new Page(0, 10);
+        page.setTotal(c.getProducts().size());
+        page.setParam("&cid=" + cid);
+        mv.addObject("page", page);
+        mv.setViewName("category.jsp");
+
+        return mv;
+    }
+
+    @RequestMapping("/search.do")
+    public ModelAndView search(String keyword) {
+        ModelAndView mv = new ModelAndView();
+        List<Product> ps = productService.searchProducts(keyword);
+        mv.addObject("ps", ps);
+        mv.setViewName("searchResult.jsp");
+        return mv;
+    }
+
+    @RequestMapping("/buyone.do")
+    public String buyone(HttpSession session, Integer pid, Integer num) {
+        User user = (User) session.getAttribute("user");
+        if(user != null) {
+            int oiid = 0;
+            OrderItem oi = orderItemService.getOrderItem(user.getId(), -1, pid);
+            if(oi != null) {
+                oi.setNumber(oi.getNumber() + num);
+                orderItemService.modifyOrderItem(oi);
+            } else {
+                oi = new OrderItem();
+                oi.setUser(user);
+                oi.setProduct(productService.getProduct(pid));
+                oi.setNumber(num);
+                orderItemService.addOrderItem(oi);
+                oiid = oi.getId();
+            }
+            return "redirect:fore/buy.do?oiid=" + oiid;
+        }
+        return "login.jsp";
+    }
+
+    @RequestMapping("/buy.do")
+    public ModelAndView buy(HttpSession session, Integer[] oiid) {
+        ModelAndView mv = new ModelAndView();
+        float total = 0;
+        List<OrderItem> ois = new ArrayList<>(oiid.length);
+        for(Integer id: oiid) {
+            OrderItem oi = orderItemService.getOrderItem(id);
+            if(oi != null) {
+                total += oi.getProduct().getPromotePrice() * oi.getNumber();
+                ois.add(oi);
+            }
+        }
+        session.setAttribute("ois", ois);
+        mv.addObject("total", total);
+        mv.setViewName("buy.jsp");
+
+        return mv;
+    }
+
+    @RequestMapping("/addCart.do")
+    @ResponseBody
+    public String addCart(HttpSession session, Integer pid, Integer num) {
+        User user = (User) session.getAttribute("user");
+        if(user != null) {
+            OrderItem oi = orderItemService.getOrderItem(user.getId(), -1, pid);
+            if(oi != null) {
+                oi.setNumber(oi.getNumber() + num);
+                orderItemService.modifyOrderItem(oi);
+            } else {
+                oi = new OrderItem();
+                oi.setUser(user);
+                oi.setProduct(productService.getProduct(pid));
+                oi.setNumber(num);
+                orderItemService.addOrderItem(oi);
+                int cartTotalItemNumber = (int) session.getAttribute("cartTotalItemNumber");
+                session.setAttribute("cartTotalItemNumber", ++cartTotalItemNumber);
+            }
+            return "success";
+        }
+        return "fail";
+    }
+
+    public ModelAndView cart(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        User user = (User) session.getAttribute("user");
+        if(user != null) {
+            List<OrderItem> ois = orderItemService.getCart(user);
+            mv.addObject("ois", ois);
+            mv.setViewName("cart.jsp");
+        } else {
+            mv.setViewName("redirect:login.jsp");
+        }
+        return mv;
+    }
 }

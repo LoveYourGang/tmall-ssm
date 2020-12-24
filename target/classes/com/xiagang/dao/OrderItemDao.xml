@@ -17,7 +17,7 @@
     </resultMap>
 
     <insert id="insertOrderItem" useGeneratedKeys="true" keyProperty="id" parameterType="com.xiagang.bean.OrderItem">
-        insert into orderitem(pid,oid,uid,number) values (#{pid},#{oid},#{uid},#{number})
+        insert into orderitem(pid,oid,uid,number) values (#{product.id},-1,#{user.id},#{number})
     </insert>
 
     <select id="selectOrderItemById" resultMap="orderItemMap">

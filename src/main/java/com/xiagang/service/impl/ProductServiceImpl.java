@@ -43,9 +43,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProducts(Category c) {
         List<Product> products = productDao.selectProductByCategory(c);
-        for(Product p: products) {
-            fillProduct(p);
-        }
+        products.forEach(p -> fillProduct(p));
         return products;
     }
 
@@ -54,6 +52,13 @@ public class ProductServiceImpl implements ProductService {
         Product product = productDao.selectProductById(id);
         fillProduct(product);
         return product;
+    }
+
+    @Override
+    public List<Product> searchProducts(String keyword) {
+        List<Product> products = productDao.selectProductByName(keyword);
+        products.forEach(this::fillProduct);
+        return products;
     }
 
     private void fillProduct(Product p) {
