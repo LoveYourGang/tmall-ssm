@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiagang.dao.ProductDao">
+    <sql id="zd">
+        id,name,subTitle,orignalPrice,promotePrice,stock,cid,createDate from product
+    </sql>
+
+    <resultMap id="productMap" type="com.xiagang.bean.Product">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="subTitle" property="subTitle" />
+        <result column="orignalPrice" property="orignalPrice" />
+        <result column="promotePrice" property="promotePrice" />
+        <result column="stock" property="stock" />
+        <result column="createDate" property="createDate" />
+        <association column="cid" property="category" javaType="com.xiagang.bean.Category" select="com.xiagang.dao.CategoryDao.selectCategoryById" fetchType="lazy" />
+    </resultMap>
+
+    <insert id="insertProduct" parameterType="com.xiagang.bean.Product" useGeneratedKeys="true" keyProperty="id">
+        insert into product(name,subTitle,orignalPrice,promotePrice,stock,cid,createDate)
+        values (#{name},#{subTitle},#{orignalPrice},#{promotePrice},#{stock},#{category.id},#{createDate})
+    </insert>
+
+    <select id="selectProductById" resultMap="productMap">
+        select <include refid="zd" /> where id=#{id}
+    </select>
+    <select id="selectProductByName" resultMap="productMap">
+        select <include refid="zd" /> where name like '%${name}%'
+    </select>
+    <select id="selectProducts" resultMap="productMap">
+        select <include refid="zd" />
+    </select>
+    <select id="selectProductByCategory" resultMap="productMap">
+        select <include refid="zd" /> where cid=#{id}
+    </select>
+    <select id="selectProductByCategoryLimit" resultMap="productMap">
+        select <include refid="zd" /> where cid=#{c.id} limit #{start},#{count}
+    </select>
+
+    <update id="updateProduct" parameterType="com.xiagang.bean.Product">
+        update product
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="subTitle != null">
+                subTitle=#{subTitle},
+            </if>
+            <if test="orignalPrice != 0.0">
+                orignalPrice=#{orignalPrice},
+            </if>
+            <if test="promotePrice != 0.0">
+                promotePrice=#{promotePrice},
+            </if>
+            <if test="stock != 0">
+                stock=#{stock},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteProduct">
+        delete from product where id=#{id}
+    </delete>
+</mapper>
