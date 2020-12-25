@@ -200,14 +200,14 @@ $(function(){
                 <input class="productNumberSetting" type="text" value="1">
                 </span>
                 <span class="arrow">
-                    <a href="#nowhere" class="increaseNumber">
+                    <a href="javascript:void(0)" class="increaseNumber">
                     <span class="updown">
                             <img src="img/site/increase.png">
                     </span>
                     </a>
                      
                     <span class="updownMiddle"> </span>
-                    <a href="#nowhere"  class="decreaseNumber">
+                    <a href="javascript:void(0)"  class="decreaseNumber">
                     <span class="updown">
                             <img src="img/site/decrease.png">
                     </span>
@@ -221,16 +221,16 @@ $(function(){
         <div class="serviceCommitment">
             <span class="serviceCommitmentDesc">服务承诺</span>
             <span class="serviceCommitmentLink">
-                <a href="#nowhere">正品保证</a>
-                <a href="#nowhere">极速退款</a>
-                <a href="#nowhere">赠运费险</a>
-                <a href="#nowhere">七天无理由退换</a>
+                <a href="javascript:void(0)">正品保证</a>
+                <a href="javascript:void(0)">极速退款</a>
+                <a href="javascript:void(0)">赠运费险</a>
+                <a href="javascript:void(0)">七天无理由退换</a>
             </span>
         </div>    
          
         <div class="buyDiv">
             <a class="buyLink" href="fore/buyone.do?pid=${p.id}"><button class="buyButton">立即购买</button></a>
-            <a href="#nowhere" class="addCartLink"><button class="addCartButton"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button></a>
+            <a href="javascript:void(0)" class="addCartLink"><button class="addCartButton"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button></a>
         </div>
     </div>
      

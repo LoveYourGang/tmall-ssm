@@ -21,7 +21,7 @@ function check() {
 }
 </script>
 
-<form method="post" action="foredoreview" onsubmit="return check();">
+<form method="post" action="fore/doreview.do" onsubmit="return check();">
 <c:forEach items="${ois }" var="oi" varStatus="st">	
 <div class="reviewDiv">
 	<div class="reviewProductInfoDiv">
@@ -104,7 +104,7 @@ function check() {
 	<c:if test="${param.showonly!=true}">
 		<button type="submit">提交评价</button>
 	</c:if>
-		<a href="forebought"><button type="button">我的订单</button></a>
+		<a href="fore/bought.do"><button type="button">我的订单</button></a>
 </div>
 
 

@@ -11,7 +11,7 @@
 <div id="footer"  class="footer" style="display: block;">
 	
     <div id="footer_ensure" class="footer_ensure">
-            <a href="#nowhere">
+            <a href="javascript:void(0)">
             	<img src="img/site/ensure.png">
             </a>
     </div>
@@ -19,36 +19,36 @@
     <div id="footer_desc" class="footer_desc">
             <div class="descColumn">
 			    <span class="descColumnTitle">购物指南</span>
-			    <a href="#nowhere" >免费注册</a> 
-			    <a href="#nowhere" >开通支付宝</a> 
-			    <a href="#nowhere" >支付宝充值</a>
+			    <a href="javascript:void(0)" >免费注册</a>
+			    <a href="javascript:void(0)" >开通支付宝</a>
+			    <a href="javascript:void(0)" >支付宝充值</a>
 			</div>
             <div class="descColumn">
 			    <span class="descColumnTitle">天猫保障</span>
-			    <a href="#nowhere" >发票保障</a> 
-			    <a href="#nowhere" >售后规则</a> 
-			    <a href="#nowhere" >缺货赔付</a>
+			    <a href="javascript:void(0)" >发票保障</a>
+			    <a href="javascript:void(0)" >售后规则</a>
+			    <a href="javascript:void(0)" >缺货赔付</a>
 			</div>
             <div class="descColumn">
 			    <span class="descColumnTitle">支付方式</span>
-			    <a href="#nowhere" >快捷支付</a> 
-			    <a href="#nowhere" >信用卡</a> 
-			    <a href="#nowhere" >蚂蚁花呗</a>
-			    <a href="#nowhere" >货到付款</a>
+			    <a href="javascript:void(0)" >快捷支付</a>
+			    <a href="javascript:void(0)" >信用卡</a>
+			    <a href="javascript:void(0)" >蚂蚁花呗</a>
+			    <a href="javascript:void(0)" >货到付款</a>
 			</div>
             <div class="descColumn">
 			    <span class="descColumnTitle">商家服务</span>
-			    <a href="#nowhere" >商家入驻</a> 
-			    <a href="#nowhere" >商家中心</a> 
-			    <a href="#nowhere" >天猫智库</a>
-			    <a href="#nowhere" >天猫规则</a>
-			    <a href="#nowhere" >物流服务</a>
-			    <a href="#nowhere" >喵言喵语</a>
-			    <a href="#nowhere" >运营服务</a>
+			    <a href="javascript:void(0)" >商家入驻</a>
+			    <a href="javascript:void(0)" >商家中心</a>
+			    <a href="javascript:void(0)" >天猫智库</a>
+			    <a href="javascript:void(0)" >天猫规则</a>
+			    <a href="javascript:void(0)" >物流服务</a>
+			    <a href="javascript:void(0)" >喵言喵语</a>
+			    <a href="javascript:void(0)" >运营服务</a>
 			</div>
             <div class="descColumn">
 			    <span class="descColumnTitle">手机天猫</span>
-			    <a href="#nowhere" ><img src="img/site/ma.png"></a> 
+			    <a href="javascript:void(0)" ><img src="img/site/ma.png"></a>
 			</div>
 			
     </div>
@@ -59,39 +59,39 @@
     
     <div id="copyright" class="copyright">
 		<div class="white_link" >
-			<a href="#nowhere" >关于天猫</a>
-			<a href="#nowhere" > 帮助中心</a>
-			<a href="#nowhere" >开放平台</a>
-			<a href="#nowhere" >  诚聘英才</a>
-			<a href="#nowhere" >联系我们</a>
-			<a href="#nowhere" >网站合作</a>
-			<a href="#nowhere" >法律声明</a>
-			<a href="#nowhere" >知识产权</a>
-			<a href="#nowhere" >  廉正举报	</a>
+			<a href="javascript:void(0)" >关于天猫</a>
+			<a href="javascript:void(0)" > 帮助中心</a>
+			<a href="javascript:void(0)" >开放平台</a>
+			<a href="javascript:void(0)" >  诚聘英才</a>
+			<a href="javascript:void(0)" >联系我们</a>
+			<a href="javascript:void(0)" >网站合作</a>
+			<a href="javascript:void(0)" >法律声明</a>
+			<a href="javascript:void(0)" >知识产权</a>
+			<a href="javascript:void(0)" >  廉正举报	</a>
 		</div>
 		<div class="white_link" >
-			<a href="#nowhere" > 阿里巴巴集团</a><span class="slash">|</span>
-			<a href="#nowhere" > 淘宝网</a><span class="slash">|</span>
-			<a href="#nowhere" >天猫 </a><span class="slash">|</span>
-			<a href="#nowhere" >  聚划算</a><span class="slash">|</span>
-			<a href="#nowhere" >全球速卖通</a><span class="slash">|</span>
-			<a href="#nowhere" >阿里巴巴国际交易市场</a><span class="slash">|</span>
-			<a href="#nowhere" >1688</a><span class="slash">|</span>
-			<a href="#nowhere" >阿里妈妈</a><span class="slash">|</span>
-			<a href="#nowhere" >  阿里旅行·去啊	</a><span class="slash">|</span>
-			<a href="#nowhere" >  阿里云计算	</a><span class="slash">|</span>
-			<a href="#nowhere" >  阿里通信 	</a><span class="slash">|</span>
-			<a href="#nowhere" >  YunOS	</a><span class="slash">|</span>
-			<a href="#nowhere" >  阿里旅行·去啊	</a><span class="slash">|</span>
-			<a href="#nowhere" >   万网	</a><span class="slash">|</span>
-			<a href="#nowhere" >  高德	</a><span class="slash">|</span>
-			<a href="#nowhere" > 优视 	</a><span class="slash">|</span>
-			<a href="#nowhere" >  友盟	</a><span class="slash">|</span>
-			<a href="#nowhere" >  虾米	</a><span class="slash">|</span>
-			<a href="#nowhere" >  天天动听	</a><span class="slash">|</span>
-			<a href="#nowhere" >  来往	</a><span class="slash">|</span>
-			<a href="#nowhere" >  钉钉	</a><span class="slash">|</span>
-			<a href="#nowhere" >  支付宝 		</a>
+			<a href="javascript:void(0)" > 阿里巴巴集团</a><span class="slash">|</span>
+			<a href="javascript:void(0)" > 淘宝网</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >天猫 </a><span class="slash">|</span>
+			<a href="javascript:void(0)" >  聚划算</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >全球速卖通</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >阿里巴巴国际交易市场</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >1688</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >阿里妈妈</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >  阿里旅行·去啊	</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >  阿里云计算	</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >  阿里通信 	</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >  YunOS	</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >  阿里旅行·去啊	</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >   万网	</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >  高德	</a><span class="slash">|</span>
+			<a href="javascript:void(0)" > 优视 	</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >  友盟	</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >  虾米	</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >  天天动听	</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >  来往	</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >  钉钉	</a><span class="slash">|</span>
+			<a href="javascript:void(0)" >  支付宝 		</a>
 		</div>
 	
 		<div class="license">

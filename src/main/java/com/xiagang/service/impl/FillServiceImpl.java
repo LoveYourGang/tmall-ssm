@@ -47,6 +47,7 @@ public class FillServiceImpl implements FillService {
     @Override
     public void fillOrder(Order order) {
         List<OrderItem> ois = orderItemDao.selectOrderItemByOrder(order);
+        ois.forEach(oi -> fillProduct(oi.getProduct()));
         order.setOrderItems(ois);
     }
 

@@ -210,8 +210,6 @@ function syncPrice(pid,num,price){
 		    function(result){
 				if("success"!=result){
 					location.href="login.jsp";
-				} else {
-					alert(num + "," + result);
 				}
 		    }
 		);

@@ -40,7 +40,7 @@ $(function(){
 	
 	$('#deleteConfirmModal').on('hidden.bs.modal', function (e) {
 		if(deleteOrder){
-			var page="foredeleteOrder";
+			var page="fore/deleteOrder.do";
 			$.post(
 				    page,
 				    {"oid":deleteOrderid},
@@ -75,11 +75,11 @@ $(function(){
 	
 <div class="boughtDiv">
 	<div class="orderType">
-		<div class="selectedOrderType"><a orderStatus="all" href="#nowhere">所有订单</a></div>
-		<div><a  orderStatus="waitPay" href="#nowhere">待付款</a></div>
-		<div><a  orderStatus="waitDelivery" href="#nowhere">待发货</a></div>
-		<div><a  orderStatus="waitConfirm" href="#nowhere">待收货</a></div>
-		<div><a  orderStatus="waitReview" href="#nowhere" class="noRightborder">待评价</a></div>
+		<div class="selectedOrderType"><a orderStatus="all" href="javascript:void(0)">所有订单</a></div>
+		<div><a  orderStatus="waitPay" href="javascript:void(0)">待付款</a></div>
+		<div><a  orderStatus="waitDelivery" href="javascript:void(0)">待发货</a></div>
+		<div><a  orderStatus="waitConfirm" href="javascript:void(0)">待收货</a></div>
+		<div><a  orderStatus="waitReview" href="javascript:void(0)" class="noRightborder">待评价</a></div>
 		<div class="orderTypeLastOne"><a class="noRightborder">&nbsp;</a></div>
 	</div>
 	<div style="clear:both"></div>
@@ -113,7 +113,7 @@ $(function(){
 						
 					</td>
 					<td class="orderItemDeleteTD">
-						<a class="deleteOrderLink" oid="${o.id}" href="#nowhere">
+						<a class="deleteOrderLink" oid="${o.id}" href="javascript:void(0)">
 							<span  class="orderListItemDelete glyphicon glyphicon-trash"></span>
 						</a>
 						
@@ -124,7 +124,7 @@ $(function(){
 						<td class="orderItemProductInfoPartTD"><img width="80" height="80" src="img/productSingle_middle/${oi.product.firstProductImage.id}.jpg"></td>
 						<td class="orderItemProductInfoPartTD">
 							<div class="orderListItemProductLinkOutDiv">
-								<a href="foreproduct?pid=${oi.product.id}">${oi.product.name}</a>
+								<a href="fore/product.do?pid=${oi.product.id}">${oi.product.name}</a>
 								<div class="orderListItemProductLinkInnerDiv">
 											<img src="img/site/creditcard.png" title="支持信用卡支付">
 											<img src="img/site/7day.png" title="消费者保障服务,承诺7天退货">
@@ -149,12 +149,12 @@ $(function(){
 							</td>
 							<td valign="top" rowspan="${fn:length(o.orderItems)}" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
 								<c:if test="${o.status=='waitConfirm' }">
-									<a href="foreconfirmPay?oid=${o.id}">
+									<a href="fore/confirmPay.do?oid=${o.id}">
 										<button class="orderListItemConfirm">确认收货</button>
 									</a>
 								</c:if>
 								<c:if test="${o.status=='waitPay' }">
-									<a href="forealipay?oid=${o.id}&total=${o.total}">
+									<a href="fore/alipay.do?oid=${o.id}&total=${o.total}">
 										<button class="orderListItemConfirm">付款</button>
 									</a>								
 								</c:if>
@@ -166,7 +166,7 @@ $(function(){
 								</c:if>
 
 								<c:if test="${o.status=='waitReview' }">
-									<a href="forereview?oid=${o.id}">
+									<a href="fore/review.do?oid=${o.id}">
 										<button  class="orderListItemReview">评价</button>
 									</a>
 								</c:if>
