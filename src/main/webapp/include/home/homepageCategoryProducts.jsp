@@ -27,7 +27,7 @@
 					<c:if test="${st.count<=5}">
 						<div class="productItem" >
 							<a href="fore/product.do?pid=${p.id}"><img width="100px" src="img/productSingle_middle/${p.firstProductImage.id}.jpg"></a>
-							<a class="productItemDescLink" href="fore/product?pid=${p.id}">
+							<a class="productItemDescLink" href="fore/product.do?pid=${p.id}">
 								<span class="productItemDesc">[热销]
 								${fn:substring(p.name, 0, 20)}
 								</span>

@@ -120,8 +120,8 @@ $(function(){
 		var pid=$(this).attr("pid");
 		var stock= $("span.orderItemStock[pid="+pid+"]").text();
 		var price= $("span.orderItemPromotePrice[pid="+pid+"]").text();
-		
 		var num= $(".orderItemNumberSetting[pid="+pid+"]").val();
+
 		--num;
 		if(num<=0)
 			num=1;
@@ -137,7 +137,7 @@ $(function(){
 			}
 		});
 		params = params.substring(1);
-		location.href="forebuy?"+params;
+		location.href="fore/buy.do?"+params;
 	});
 	
 	
@@ -252,7 +252,7 @@ function syncPrice(pid,num,price){
 						</td>
 						<td>
 							<div class="cartProductLinkOutDiv">
-								<a href="foreproduct?pid=${oi.product.id}" class="cartProductLink">${oi.product.name}</a>
+								<a href="fore/product.do?pid=${oi.product.id}" class="cartProductLink">${oi.product.name}</a>
 								<div class="cartProductLinkInnerDiv">
 									<img src="img/site/creditcard.png" title="支持信用卡支付">
 									<img src="img/site/7day.png" title="消费者保障服务,承诺7天退货">
@@ -271,9 +271,9 @@ function syncPrice(pid,num,price){
 							<div class="cartProductChangeNumberDiv">
 								<span class="hidden orderItemStock " pid="${oi.product.id}">${oi.product.stock}</span>
 								<span class="hidden orderItemPromotePrice " pid="${oi.product.id}">${oi.product.promotePrice}</span>
-								<a  pid="${oi.product.id}" class="numberMinus" href="#nowhere">-</a>
+								<a  pid="${oi.product.id}" class="numberMinus" href="javascript:void(0)">-</a>
 								<input pid="${oi.product.id}" oiid="${oi.id}" class="orderItemNumberSetting" autocomplete="off" value="${oi.number}">
-								<a  stock="${oi.product.stock}" pid="${oi.product.id}" class="numberPlus" href="#nowhere">+</a>
+								<a  stock="${oi.product.stock}" pid="${oi.product.id}" class="numberPlus" href="javascript:void(0)">+</a>
 							</div>					
 						
 						 </td>
@@ -284,7 +284,7 @@ function syncPrice(pid,num,price){
 						
 						</td>
 						<td>
-							<a class="deleteOrderItem" oiid="${oi.id}"  href="#nowhere">删除</a>
+							<a class="deleteOrderItem" oiid="${oi.id}"  href="javascript:void(0)">删除</a>
 						</td>
 					</tr>
 				</c:forEach>				

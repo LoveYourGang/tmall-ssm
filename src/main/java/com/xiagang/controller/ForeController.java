@@ -271,7 +271,7 @@ public class ForeController {
             mv.addObject("ois", ois);
             mv.setViewName("cart.jsp");
         } else {
-            mv.setViewName("redirect:login.jsp");
+            mv.setViewName("redirect:/login.jsp");
         }
         return mv;
     }

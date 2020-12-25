@@ -75,7 +75,7 @@ $(function(){
         return false;
     });
     $(".buyLink").click(function(){
-        var page = "fore/checkLogin";
+        var page = "fore/checkLogin.do";
         $.get(
                 page,
                 function(result){
@@ -101,7 +101,7 @@ $(function(){
             return false;
         }
          
-        var page = "foreloginAjax";
+        var page = "fore/ajaxLogin.do";
         $.get(
                 page,
                 {"name":name,"password":password},

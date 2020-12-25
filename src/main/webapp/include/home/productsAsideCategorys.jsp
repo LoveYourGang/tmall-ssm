@@ -23,7 +23,7 @@ $(function(){
 			<div class="row show1">
 				<c:forEach items="${ps}" var="p">
 					<c:if test="${!empty p.subTitle}">
-						<a href="foreproduct?pid=${p.id}">
+						<a href="fore/product.do?pid=${p.id}">
 							<c:forEach items="${fn:split(p.subTitle, ' ')}" var="title" varStatus="st">
 								<c:if test="${st.index==0}">
 									${title}

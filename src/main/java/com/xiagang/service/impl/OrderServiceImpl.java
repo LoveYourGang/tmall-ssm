@@ -5,6 +5,7 @@ import com.xiagang.bean.OrderItem;
 import com.xiagang.bean.User;
 import com.xiagang.dao.OrderDao;
 import com.xiagang.dao.OrderItemDao;
+import com.xiagang.service.FillService;
 import com.xiagang.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,13 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao;
     private OrderItemDao orderItemDao;
+    private FillService fill;
 
     @Autowired
-    public OrderServiceImpl(OrderDao orderDao, OrderItemDao orderItemDao) {
+    public OrderServiceImpl(OrderDao orderDao, OrderItemDao orderItemDao, FillService fill) {
         this.orderDao = orderDao;
         this.orderItemDao = orderItemDao;
+        this.fill = fill;
     }
 
     @Override
@@ -34,14 +37,14 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getOrder(Integer id) {
         Order order = orderDao.selectOrderById(id);
-        fillOrder(order);
+        fill.fillOrder(order);
         return order;
     }
 
     @Override
     public List<Order> getOrder(User user) {
         List<Order> orders = orderDao.selectOrderByUser(user);
-        orders.forEach(this::fillOrder);
+        orders.forEach(fill::fillOrder);
         return orders;
     }
 
@@ -78,8 +81,8 @@ public class OrderServiceImpl implements OrderService {
         return sb.toString();
     }
 
-    private void fillOrder(Order order) {
-        List<OrderItem> ois = orderItemDao.selectOrderItemByOrder(order);
-        order.setOrderItems(ois);
-    }
+//    private void fillOrder(Order order) {
+//        List<OrderItem> ois = orderItemDao.selectOrderItemByOrder(order);
+//        order.setOrderItems(ois);
+//    }
 }

@@ -10,7 +10,7 @@
 		<img id="simpleLogo" class="simpleLogo" src="img/site/simpleLogo.png">	
 	</a>
 
-	<form action="foresearch" method="post" >	
+	<form action="fore/search.do" method="post" >
 	<div class="simpleSearchDiv pull-right">
 		<input type="text" placeholder="平衡车   iPhone XS Max"  value="${param.keyword}" name="keyword">
 		<button class="searchButton" type="submit">搜天猫</button>
@@ -18,7 +18,7 @@
 			<c:forEach items="${cs}" var="c" varStatus="st">
 				<c:if test="${st.count>=8 and st.count<=11}">
 					<span>
-						<a href="forecategory?cid=${c.id}">
+						<a href="fore/category.do?cid=${c.id}">
 							${c.name}
 						</a>
 						<c:if test="${st.count!=11}">				

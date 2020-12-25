@@ -80,7 +80,7 @@ $(function(){
 		<c:forEach items="${cs}" var="c" varStatus="st">
 			<c:if test="${st.count<=4}">
 				<span>
-				<a href="/fore/category.do?cid=${c.id}">
+				<a href="fore/category.do?cid=${c.id}">
 					${c.name}
 				</a></span>			
 			</c:if>
