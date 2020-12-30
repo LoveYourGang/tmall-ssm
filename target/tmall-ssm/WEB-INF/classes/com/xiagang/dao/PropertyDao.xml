@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiagang.dao.PropertyDao">
+    <sql id="zd">
+        id,name,cid from property
+    </sql>
+    <resultMap id="propertyMap" type="com.xiagang.bean.Property">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <association column="cid" property="category" javaType="com.xiagang.bean.Category" select="com.xiagang.dao.CategoryDao.selectCategoryById" fetchType="lazy" />
+    </resultMap>
+
+    <insert id="insertProperty" useGeneratedKeys="true" keyProperty="id" parameterType="com.xiagang.bean.Property">
+        insert into property(name,cid) values (#{name},#{category.id})
+    </insert>
+
+    <select id="selectPropertyById" resultMap="propertyMap">
+        select <include refid="zd" /> where id=#{id}
+    </select>
+    <select id="selectPropertyByName" resultMap="propertyMap">
+        select <include refid="zd" /> where name=#{name}
+    </select>
+    <select id="selectPropertyByCategory" resultMap="propertyMap" parameterType="com.xiagang.bean.Category">
+        select <include refid="zd" /> where cid=#{id}
+    </select>
+
+    <update id="updateProperty" parameterType="com.xiagang.bean.Property">
+        update property set name=#{name} where id=#{id}
+    </update>
+
+    <delete id="deleteProperty">
+        delete from property where id=#{id}
+    </delete>
+</mapper>

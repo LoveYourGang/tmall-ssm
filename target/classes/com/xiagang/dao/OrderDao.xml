@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiagang.dao.OrderDao">
+    <sql id="zd">
+        order_.id as id,orderCode,address,post,receiver,mobile,userMessage,createDate,payDate,deliveryDate,confirmDate,uid,status from order_
+    </sql>
+
+    <resultMap id="orderMap" type="com.xiagang.bean.Order">
+        <id column="id" property="id" />
+        <result column="orderCode" property="orderCode" />
+        <result column="address" property="address" />
+        <result column="post" property="post" />
+        <result column="receiver" property="receiver" />
+        <result column="mobile" property="mobile" />
+        <result column="userMessage" property="userMessage" />
+        <result column="createDate" property="createDate" />
+        <result column="payDate" property="payDate" />
+        <result column="deliveryDate" property="deliveryDate" />
+        <result column="confirmDate" property="confirmDate" />
+        <result column="status" property="status" />
+        <association column="uid" property="user" javaType="com.xiagang.bean.User" fetchType="lazy" select="com.xiagang.dao.UserDao.selectUserById" />
+    </resultMap>
+
+    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into order_(orderCode,address,post,receiver,mobile,userMessage,createDate,payDate,deliveryDate,confirmDate,uid,status)
+        values(#{orderCode},#{address},#{post},#{receiver},#{mobile},#{userMessage},#{createDate},#{payDate},#{deliveryDate},#{confirmDate},#{user.id},#{status})
+    </insert>
+
+    <select id="selectOrderById" resultMap="orderMap">
+        select <include refid="zd" />
+        where id=#{id}
+    </select>
+    <select id="selectOrderByOrderCode" resultMap="orderMap">
+        select <include refid="zd" />
+        where orderCode=#{orderCode}
+    </select>
+    <select id="selectOrderByUser" resultMap="orderMap">
+        select <include refid="zd" />
+        where uid=#{id}
+    </select>
+    <select id="selectOrderByUserAndStatus" resultMap="orderMap">
+        select <include refid="zd" />
+        where uid=#{user.id} and status=#{status}
+    </select>
+    <select id="selectAllOrders" resultMap="orderMap">
+        select <include refid="zd" />
+    </select>
+    <select id="selectOrderLimit" resultMap="orderMap">
+        select <include refid="zd" />
+        order by id asc limit #{start},#{count}
+    </select>
+
+    <update id="updateOrder" useGeneratedKeys="true" keyProperty="id">
+        update order_ set 
+        address=#{address},post=#{post},receiver=#{receiver},mobile=#{mobile},userMessage=#{userMessage},
+        payDate=#{payDate},deliveryDate=#{deliveryDate},confirmDate=#{confirmDate},status=#{status}
+        where id=#{id} or orderCode=#{orderCode}
+    </update>
+    <update id="updateOrderStatus">
+        update order_ set status=#{status} where id=#{id}
+    </update>
+
+    <update id="deleteOrder">
+        update order_ set status='delete' where id=#{id}
+    </update>
+</mapper>
