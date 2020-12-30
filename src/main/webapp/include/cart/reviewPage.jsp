@@ -21,7 +21,7 @@ function check() {
 }
 </script>
 
-<form method="post" action="fore/doreview.do" onsubmit="return check();">
+<form method="post" action="fore/doReview.do" onsubmit="return check();">
 <c:forEach items="${ois }" var="oi" varStatus="st">	
 <div class="reviewDiv">
 	<div class="reviewProductInfoDiv">
@@ -46,7 +46,7 @@ function check() {
 			</table>
 			
 			<div class="reviewProductInfoRightBelowDiv">
-				<span class="reviewProductInfoRightBelowImg"><img1 src="img/site/reviewLight.png"></span>
+				<span class="reviewProductInfoRightBelowImg"><img src="img/site/reviewLight.png"></span>
 				<span class="reviewProductInfoRightBelowText" >现在查看的是 您所购买商品的信息
 于<fmt:formatDate value="${o.createDate}" pattern="yyyy年MM月dd日 HH:mm:ss"/>下单购买了此商品 </span>
 			
@@ -91,7 +91,6 @@ function check() {
 			<div class="makeReviewButtonDiv">
 				<input type="hidden" name="oid" value="${o.id}">
 				<input type="hidden" name="pid" value="${oi.product.id}">
-				
 			</div>
 		
 		</div>	

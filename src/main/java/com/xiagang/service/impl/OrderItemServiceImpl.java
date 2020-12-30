@@ -4,7 +4,7 @@ import com.xiagang.bean.OrderItem;
 import com.xiagang.bean.Product;
 import com.xiagang.bean.User;
 import com.xiagang.dao.OrderItemDao;
-import com.xiagang.service.FillService;
+import com.xiagang.service.BaseService;
 import com.xiagang.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,12 @@ import java.util.List;
 @Service("orderItemService")
 public class OrderItemServiceImpl implements OrderItemService {
     private OrderItemDao orderItemDao;
-    private FillService fill;
+    private BaseService base;
 
     @Autowired
-    public OrderItemServiceImpl(OrderItemDao orderItemDao, FillService fill) {
+    public OrderItemServiceImpl(OrderItemDao orderItemDao, BaseService base) {
         this.orderItemDao = orderItemDao;
-        this.fill = fill;
+        this.base = base;
     }
 
     @Override
@@ -37,24 +37,29 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public OrderItem getOrderItem(Integer id) {
         OrderItem oi = orderItemDao.selectOrderItemById(id);
-        fill.fillProduct(oi.getProduct());
-        fill.fillOrder(oi.getOrder());
+        if(oi != null) {
+            base.fillProduct(oi.getProduct());
+            if(oi.getOrder() != null)
+                base.fillOrder(oi.getOrder());
+        }
         return oi;
     }
 
     @Override
     public OrderItem getOrderItem(Integer uid, Integer oid, Integer pid) {
         OrderItem oi = orderItemDao.selectOrderItemByUserOrderProduct(uid, oid, pid);
-        fill.fillProduct(oi.getProduct());
-        if(oi.getOrder() != null)
-            fill.fillOrder(oi.getOrder());
+        if(oi != null) {
+            base.fillProduct(oi.getProduct());
+            if(oi.getOrder() != null)
+                base.fillOrder(oi.getOrder());
+        }
         return oi;
     }
 
     @Override
     public List<OrderItem> getCart(User user) {
         List<OrderItem> ois = orderItemDao.selectUserCart(user);
-        ois.forEach(oi -> fill.fillProduct(oi.getProduct())); //购物车无需填充订单
+        ois.forEach(oi -> base.fillProduct(oi.getProduct())); //购物车无需填充订单
         return ois;
     }
 

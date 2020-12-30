@@ -53,9 +53,9 @@ $(function(){
 					<td>${c.name}</td>
 					 	
 					<td><a href="admin_property_list?cid=${c.id}"><span class="glyphicon glyphicon-th-list"></span></a></td>					
-					<td><a href="admin_product_list?cid=${c.id}"><span class="glyphicon glyphicon-shopping-cart"></span></a></td>					
-					<td><a href="admin_category_edit?id=${c.id}"><span class="glyphicon glyphicon-edit"></span></a></td>
-					<td><a deleteLink="true" href="admin_category_delete?id=${c.id}"><span class=" 	glyphicon glyphicon-trash"></span></a></td>
+					<td><a href="product/list.do?cid=${c.id}"><span class="glyphicon glyphicon-shopping-cart"></span></a></td>
+					<td><a href="category/edit.do?id=${c.id}"><span class="glyphicon glyphicon-edit"></span></a></td>
+					<td><a deleteLink="true" href="category/delete.do?id=${c.id}"><span class=" 	glyphicon glyphicon-trash"></span></a></td>
 	
 				</tr>
 				</c:forEach>
@@ -70,7 +70,7 @@ $(function(){
 	<div class="panel panel-warning addDiv">
 	  <div class="panel-heading">新增分类</div>
 	  <div class="panel-body"><!--  -->
-	    	<form method="post" id="addForm" action="admin_category_add" enctype="multipart/form-data">
+	    	<form method="post" id="addForm" action="category/add.do" enctype="multipart/form-data">
 	    		<table class="addTable">
 	    			<tr>
 	    				<td>分类名称</td>

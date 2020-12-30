@@ -5,7 +5,7 @@
 
 <mapper namespace="com.xiagang.dao.CategoryDao">
     <insert id="insertCategory" useGeneratedKeys="true" keyProperty="id">
-        insert into catogory(name) values(#{name})
+        insert into category(name) values(#{name})
     </insert>
     
     <select id="selectCategoryById" resultType="Category">

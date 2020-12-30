@@ -9,6 +9,6 @@
 	<div class="orderFinishTextDiv">
 		<img src="img/site/orderFinish.png">
 		<span>交易已经成功，卖家将收到您的货款。</span>
-		<a href="forebought">返回我的订单</a>
+		<a href="fore/bought.do">返回我的订单</a>
 	</div>
 </div>

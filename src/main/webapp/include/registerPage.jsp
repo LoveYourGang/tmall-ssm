@@ -24,7 +24,12 @@ $(function(){
 			$("span.errorMessage").html("请输入密码");
 			$("div.registerErrorMessageDiv").css("visibility","visible");			
 			return false;
-		}		
+		}
+		if(6 > $("#password").val().length){
+			$("span.errorMessage").html("请输入至少6位密码");
+			$("div.registerErrorMessageDiv").css("visibility","visible");
+			return false;
+		}
 		if(0==$("#repeatpassword").val().length){
 			$("span.errorMessage").html("请输入重复密码");
 			$("div.registerErrorMessageDiv").css("visibility","visible");			
@@ -43,7 +48,7 @@ $(function(){
 var xmlhttp;
 function check() {
 	var name = document.getElementById("name").value;
-	var url = "foreregisterCheck?name=" + name;
+	var url = "fore/registerCheck.do?name=" + name;
 	url = encodeURI(encodeURI(url));
 	xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = checkResult;
@@ -60,7 +65,7 @@ function checkResult() {
 
 
 
-<form method="post" action="foreregister" class="registerForm">
+<form method="post" action="fore/register.do" class="registerForm">
 
 
 <div class="registerDiv">

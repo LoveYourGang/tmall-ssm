@@ -18,23 +18,22 @@ $(function(){
 <nav>
   <ul class="pagination">
     <li <c:if test="${!page.hasPrevious}">class="disabled"</c:if>>
-      <a  href="?page.start=0${page.param}" aria-label="Previous" >
+      <a  href="${path}?page.start=0${page.param}" aria-label="Previous" >
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
 
     <li <c:if test="${!page.hasPrevious}">class="disabled"</c:if>>
-      <a  href="?page.start=${page.start-page.count}${page.param}" aria-label="Previous" >
+      <a  href="${path}?page.start=${page.start-page.count}${page.param}" aria-label="Previous" >
         <span aria-hidden="true">&lsaquo;</span>
       </a>
     </li>    
 
     <c:forEach begin="0" end="${page.totalPage-1}" varStatus="status">
-    
     	
 		    <li <c:if test="${status.index*page.count==page.start}">class="disabled"</c:if>>
 		    	<a  
-		    	href="?page.start=${status.index*page.count}${page.param}"
+		    	href="${path}?page.start=${status.index*page.count}${page.param}"
 		    	<c:if test="${status.index*page.count==page.start}">class="current"</c:if>
 		    	>${status.count}</a>
 		    </li>
@@ -42,12 +41,12 @@ $(function(){
     </c:forEach>
 
     <li <c:if test="${!page.hasNext}">class="disabled"</c:if>>
-      <a href="?page.start=${page.start+page.count}${page.param}" aria-label="Next">
+      <a href="${path}?page.start=${page.start+page.count}${page.param}" aria-label="Next">
         <span aria-hidden="true">&rsaquo;</span>
       </a>
     </li>
     <li <c:if test="${!page.hasNext}">class="disabled"</c:if>>
-      <a href="?page.start=${page.last}${page.param}" aria-label="Next">
+      <a href="${path}?page.start=${page.last}${page.param}" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>

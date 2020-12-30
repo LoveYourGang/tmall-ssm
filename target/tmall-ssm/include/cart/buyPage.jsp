@@ -7,7 +7,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <div class="buyPageDiv">
-  <form action="forecreateOrder" method="post">
+  <form action="fore/createOrder.do" method="post">
   
 	<div class="buyFlow">
 		<img class="pull-left" src="img/site/simpleLogo.png">
@@ -72,7 +72,7 @@
 					<tr class="orderItemTR">
 						<td class="orderItemFirstTD"><img class="orderItemImg" src="img/productSingle_middle/${oi.product.firstProductImage.id}.jpg"></td>
 						<td class="orderItemProductInfo">
-						<a  href="foreproduct?pid=${oi.product.id}" class="orderItemProductLink">
+						<a  href="fore/product.do?pid=${oi.product.id}" class="orderItemProductLink">
 							${oi.product.name}
 						</a>
 						

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,30 +53,19 @@ public class ForeController {
     }
 
     @RequestMapping("/register.do")
-    public ModelAndView register(String name, String password) {
-        ModelAndView mv = new ModelAndView();
-        String page = "register.jsp";
-        if(password == null || password.length() < 6) {
-            String msg = "至少输入6位数密码";
-            page = "forward:register.jsp";
-            mv.addObject("msg", msg);
-            mv.setViewName(page);
-            return mv;
-        }
-        if(name != null && userService.registerCheck(name) == 0) {
+    public String register(String name, String password) {
+        String page = "redirect:/register.jsp";
+        if(userService.registerCheck(name) == 0) {
             User user = new User(name, password);
             int res = userService.register(user);
             if(res > 0) {
-                page = "redirect:registerSuccess.jsp";
-            } else {
-                page = "redirect:register.jsp";
+                page = "redirect:/registerSuccess.jsp";
             }
         }
-        mv.setViewName(page);
-        return mv;
+        return page;
     }
 
-    @RequestMapping("/registerCheck.do")
+    @RequestMapping(value = "/registerCheck.do", produces="text/plain;charset=UTF-8")
     @ResponseBody
     public String registerCheck(String name) {
         String msg;
@@ -215,7 +203,7 @@ public class ForeController {
                 orderItemService.addOrderItem(oi);
                 oiid = oi.getId();
             }
-            return "redirect:fore/buy.do?oiid=" + oiid;
+            return "redirect:buy.do?oiid=" + oiid;
         }
         return "login.jsp";
     }
@@ -318,7 +306,7 @@ public class ForeController {
             }
         }
         session.setAttribute("cartTotalItemNumber", cartTotalItemNumber);
-        return "redirect:fore/alipay.do?oid=" + order.getId() + "&total=" + order.getTotal();
+        return "redirect:alipay.do?oid=" + order.getId() + "&total=" + order.getTotal();
     }
 
     @RequestMapping("/alipay.do")
@@ -367,13 +355,12 @@ public class ForeController {
     }
 
     @RequestMapping("orderConfirmed.do")
-    @ResponseBody
     public String orderConfirmed(Integer oid) {
         Order order = orderService.getOrder(oid);
         if(orderService.confirmOrder(order) > 0) {
             return "orderConfirmed.jsp";
         }
-        return "redirect:fore/confirmPay.do?oid=" + oid;
+        return "redirect:bought.do";
     }
 
     @RequestMapping("/review.do")
@@ -411,6 +398,6 @@ public class ForeController {
         if(flag) {
             orderService.finishOrder(order);
         }
-        return "redirect:fore/review.do?showonly=true&oid=" + oid;
+        return "fore/review.do?showonly=true&oid=" + oid;
     }
 }

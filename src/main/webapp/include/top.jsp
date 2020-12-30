@@ -17,7 +17,7 @@
 			<a href="login.jsp">${user.name}</a>
 			<a href="fore/logout.do">退出</a>
 			<c:if test="${user.name eq 'xiagang' }">
-				<a href="admin_category_list">管理员页面</a>
+				<a href="category/list.do">管理员页面</a>
 			</c:if>	
 		</c:if>
 		

@@ -38,7 +38,7 @@
 				<tr>
 					<td><img width="50px" src="img/productSingle_middle/${oi.product.firstProductImage.id}.jpg"></td>
 					<td class="confirmPayOrderItemProductLink">
-						<a href="#nowhere">${oi.product.name}</a>
+						<a href="fore/product.do?pid=${oi.product.id}">${oi.product.name}</a>
 					</td>
 					<td>￥<fmt:formatNumber type="number" value="${oi.product.orignalPrice}" minFractionDigits="2"/></td>
 					<td>1</td>
@@ -78,6 +78,6 @@
 	</div>
 	<div class="confirmPayButtonDiv">
 		<div class="confirmPayWarning">请收到货后，再确认收货！否则您可能钱货两空！</div>
-		<a href="foreorderConfirmed?oid=${o.id}"><button class="confirmPayButton">确认支付</button></a>
+		<a href="fore/orderConfirmed.do?oid=${o.id}"><button class="confirmPayButton">确认支付</button></a>
 	</div>
 </div>

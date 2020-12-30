@@ -9,8 +9,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix='fmt' %> 
 
 <html>
+	<%
+	String basePath = request.getScheme() + "://" +
+	request.getServerName() + ":" +
+	request.getServerPort() + request.getContextPath() + "/";
+    %>
 
 <head>
+	<base href="<%=basePath%>">
 	<script src="js/jquery/2.0.0/jquery.min.js"></script>
 	<link href="css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
 	<script src="js/bootstrap/3.3.6/bootstrap.min.js"></script>
