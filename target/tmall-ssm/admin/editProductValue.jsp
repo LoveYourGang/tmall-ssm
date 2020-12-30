@@ -16,7 +16,7 @@
 $(function() {
 	$("input.pvValue").keyup(function(){
 		var value = $(this).val();
-		var page = "admin_product_updatePropertyValue";
+		var page = "product/modifyPropertyValue.do";
 		var pvid = $(this).attr("pvid");
 		var parentSpan = $(this).parent("span");
 		parentSpan.css("border","1px solid yellow");
@@ -36,8 +36,8 @@ $(function() {
 
 <div class="workingArea">
 	<ol class="breadcrumb">
-	  <li><a href="admin_category_list">所有分类</a></li>
-	  <li><a href="admin_product_list?cid=${p.category.id}">${p.category.name}</a></li>
+	  <li><a href="category/list.do">所有分类</a></li>
+	  <li><a href="product/list.do?cid=${p.category.id}">${p.category.name}</a></li>
 	  <li class="active">${p.name}</li>
 	  <li class="active">编辑产品属性</li>
 	</ol>

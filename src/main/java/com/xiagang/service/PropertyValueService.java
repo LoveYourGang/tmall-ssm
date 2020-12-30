@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface PropertyValueService {
     List<PropertyValue> getPropertyValue(Product p);
+
+    int modifyPropertyValue(PropertyValue pv);
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("propertyValueService")
+@Service("pvService")
 public class PropertyValueServiceImpl implements PropertyValueService {
     private PropertyValueDao propertyValueDao;
 
@@ -21,5 +21,10 @@ public class PropertyValueServiceImpl implements PropertyValueService {
     @Override
     public List<PropertyValue> getPropertyValue(Product p) {
         return propertyValueDao.selectPropertyValueByProduct(p);
+    }
+
+    @Override
+    public int modifyPropertyValue(PropertyValue pv) {
+        return propertyValueDao.updatePropertyValue(pv);
     }
 }

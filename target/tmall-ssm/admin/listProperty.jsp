@@ -26,8 +26,8 @@
 <div class="workingArea">
 
 	<ol class="breadcrumb">
-	  <li><a href="admin_category_list">所有分类</a></li>
-	  <li><a href="admin_property_list?cid=${c.id}">${c.name}</a></li>
+	  <li><a href="category/list.do">所有分类</a></li>
+	  <li><a href="property/list.do?cid=${c.id}">${c.name}</a></li>
 	  <li class="active">属性管理</li>
 	</ol>
 
@@ -50,10 +50,10 @@
 					<tr>
 						<td>${pt.id}</td>
 						<td>${pt.name}</td>
-						<td><a href="admin_property_edit?id=${pt.id}"><span
+						<td><a href="property/edit.do?id=${pt.id}"><span
 								class="glyphicon glyphicon-edit"></span></a></td>
 						<td><a deleteLink="true"
-							href="admin_property_delete?id=${pt.id}"><span
+							href="property/delete.do?id=${pt.id}"><span
 								class=" 	glyphicon glyphicon-trash"></span></a></td>
 
 					</tr>
@@ -69,7 +69,7 @@
 	<div class="panel panel-warning addDiv">
 		<div class="panel-heading">新增属性</div>
 		<div class="panel-body">
-			<form method="post" id="addForm" action="admin_property_add">
+			<form method="post" id="addForm" action="property/add.do">
 				<table class="addTable">
 					<tr>
 						<td>属性名称</td>

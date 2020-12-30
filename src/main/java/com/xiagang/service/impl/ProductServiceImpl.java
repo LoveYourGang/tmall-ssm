@@ -11,6 +11,7 @@ import com.xiagang.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service("productService")
@@ -32,6 +33,12 @@ public class ProductServiceImpl implements ProductService {
         this.reviewDao = reviewDao;
         this.orderItemDao = orderItemDao;
         this.base = base;
+    }
+
+    @Override
+    public int addProduct(Product p) {
+        p.setCreateDate(new Date());
+        return productDao.insertProduct(p);
     }
 
     @Override
@@ -62,6 +69,16 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = productDao.selectProductByName(keyword);
         products.forEach(base::fillProduct);
         return products;
+    }
+
+    @Override
+    public int modifyProduct(Product p) {
+        return productDao.updateProduct(p);
+    }
+
+    @Override
+    public int deleteProduct(Integer id) {
+        return productDao.deleteProduct(id);
     }
 
 //    private void fillProduct(Product p) {

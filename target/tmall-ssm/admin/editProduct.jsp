@@ -32,8 +32,8 @@ $(function() {
 
 <div class="workingArea">
 	<ol class="breadcrumb">
-	  <li><a href="admin_category_list">所有分类</a></li>
-	  <li><a href="admin_product_list?cid=${p.category.id}">${p.category.name}</a></li>
+	  <li><a href="category/list.do">所有分类</a></li>
+	  <li><a href="product/list.do?cid=${p.category.id}">${p.category.name}</a></li>
 	  <li class="active">${p.name}</li>
 	  <li class="active">编辑产品</li>
 	</ol>
@@ -41,7 +41,7 @@ $(function() {
 	<div class="panel panel-warning editDiv">
 		<div class="panel-heading">编辑产品</div>
 		<div class="panel-body">
-			<form method="post" id="editForm" action="admin_product_update">
+			<form method="post" id="editForm" action="product/modify.do">
 				<table class="editTable">
 					<tr>
 						<td>产品名称</td>
