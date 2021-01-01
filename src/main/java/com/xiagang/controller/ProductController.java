@@ -2,9 +2,11 @@ package com.xiagang.controller;
 
 import com.xiagang.bean.Category;
 import com.xiagang.bean.Product;
+import com.xiagang.bean.Property;
 import com.xiagang.bean.PropertyValue;
 import com.xiagang.service.CategoryService;
 import com.xiagang.service.ProductService;
+import com.xiagang.service.PropertyService;
 import com.xiagang.service.PropertyValueService;
 import com.xiagang.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +24,17 @@ public class ProductController {
     private ProductService productService;
     private CategoryService categoryService;
     private PropertyValueService pvService;
+    private PropertyService propertyService;
 
     @Autowired
-    public ProductController(ProductService productService, CategoryService categoryService, PropertyValueService pvService) {
+    public ProductController(ProductService productService,
+                             CategoryService categoryService,
+                             PropertyValueService pvService,
+                             PropertyService propertyService) {
         this.productService = productService;
         this.categoryService = categoryService;
         this.pvService = pvService;
+        this.propertyService = propertyService;
     }
 
     @RequestMapping("/list.do")
@@ -80,6 +87,17 @@ public class ProductController {
         ModelAndView mv = new ModelAndView();
         Product p = productService.getProduct(id);
         List<PropertyValue> pvs = pvService.getPropertyValue(p);
+        if(pvs.isEmpty()) {
+            List<Property> pts = propertyService.getProperty(p.getCategory());
+            pts.forEach(pt -> {
+                PropertyValue pv = new PropertyValue();
+                pv.setProduct(p);
+                pv.setProperty(pt);
+                if(pvService.addPropertyValue(pv) > 0) {
+                    pvs.add(pv);
+                }
+            });
+        }
         mv.addObject("p", p);
         mv.addObject("pvs", pvs);
         mv.setViewName("admin/editProductValue.jsp");

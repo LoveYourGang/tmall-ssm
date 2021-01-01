@@ -4,7 +4,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	
 <script>
 $(function(){
@@ -18,13 +18,13 @@ $(function(){
 <nav>
   <ul class="pagination">
     <li <c:if test="${!page.hasPreviouse}">class="disabled"</c:if>>
-      <a  href="?page.start=0${page.param}" aria-label="Previous" >
+      <a  href="${path}?page.start=0${page.param}" aria-label="Previous" >
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
 
     <li <c:if test="${!page.hasPreviouse}">class="disabled"</c:if>>
-      <a  href="?page.start=${page.start-page.count}${page.param}" aria-label="Previous" >
+      <a  href="${path}?page.start=${page.start-page.count}${page.param}" aria-label="Previous" >
         <span aria-hidden="true">&lsaquo;</span>
       </a>
     </li>    
@@ -34,7 +34,7 @@ $(function(){
     	<c:if test="${status.count*page.count-page.start<=20 && status.count*page.count-page.start>=-10}">
 		    <li <c:if test="${status.index*page.count==page.start}">class="disabled"</c:if>>
 		    	<a  
-		    	href="?page.start=${status.index*page.count}${page.param}"
+		    	href="${path}?page.start=${status.index*page.count}${page.param}"
 		    	<c:if test="${status.index*page.count==page.start}">class="current"</c:if>
 		    	>${status.count}</a>
 		    </li>
@@ -42,12 +42,12 @@ $(function(){
     </c:forEach>
 
     <li <c:if test="${!page.hasNext}">class="disabled"</c:if>>
-      <a href="?page.start=${page.start+page.count}${page.param}" aria-label="Next">
+      <a href="${path}?page.start=${page.start+page.count}${page.param}" aria-label="Next">
         <span aria-hidden="true">&rsaquo;</span>
       </a>
     </li>
     <li <c:if test="${!page.hasNext}">class="disabled"</c:if>>
-      <a href="?page.start=${page.last}${page.param}" aria-label="Next">
+      <a href="${path}?page.start=${page.last}${page.param}" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>

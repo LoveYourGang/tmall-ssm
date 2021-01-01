@@ -10,8 +10,10 @@ public interface OrderService {
 
     Order getOrder(Integer id);
     List<Order> getOrder(User user);
+    List<Order> getAllOrders();
 
     int payOrder(Order order);
+    int deliveryOrder(Order order);
     int confirmOrder(Order order);
     int finishOrder(Order order);
 

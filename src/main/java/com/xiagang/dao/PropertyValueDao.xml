@@ -15,6 +15,10 @@
         <association column="ptid" property="property" javaType="com.xiagang.bean.Property" select="com.xiagang.dao.PropertyDao.selectPropertyById" fetchType="lazy" />
     </resultMap>
 
+    <insert id="insertPropertyValue" parameterType="com.xiagang.bean.PropertyValue" useGeneratedKeys="true" keyProperty="id">
+        insert into propertyvalue(pid,ptid,value) values (#{product.id},#{property.id},#{value})
+    </insert>
+
     <select id="selectPropertyValueById" resultMap="propertyValueMap">
         select <include refid="zd" /> where id=#{id}
     </select>

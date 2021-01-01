@@ -48,9 +48,23 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> getAllOrders() {
+        List<Order> orders = orderDao.selectAllOrders();
+        orders.forEach(base::fillOrder);
+        return orders;
+    }
+
+    @Override
     public int payOrder(Order order) {
         order.setPayDate(new Date());
         order.setStatus(Order.waitDelivery);
+        return orderDao.updateOrder(order);
+    }
+
+    @Override
+    public int deliveryOrder(Order order) {
+        order.setDeliveryDate(new Date());
+        order.setStatus(Order.waitConfirm);
         return orderDao.updateOrder(order);
     }
 

@@ -19,6 +19,11 @@ public class PropertyValueServiceImpl implements PropertyValueService {
     }
 
     @Override
+    public int addPropertyValue(PropertyValue pv) {
+        return propertyValueDao.insertPropertyValue(pv);
+    }
+
+    @Override
     public List<PropertyValue> getPropertyValue(Product p) {
         return propertyValueDao.selectPropertyValueByProduct(p);
     }
